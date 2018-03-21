@@ -1,0 +1,18 @@
+PODS:
+  - Alamofire (4.7.0)
+  - AlpsSDK (0.6.0):
+    - Alamofire (~> 4.0)
+    - Starscream (~> 3.0)
+  - Starscream (3.0.4)
+
+DEPENDENCIES:
+  - AlpsSDK (~> 0.6)
+
+SPEC CHECKSUMS:
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  AlpsSDK: 89fc7d35777e8bc230e6cd604cdaeefb3bd915b7
+  Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
+
+PODFILE CHECKSUM: 560b7f752691f77d0365bace9ad1d5ce3e92a81e
+
+COCOAPODS: 1.4.0
