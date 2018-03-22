@@ -1,21 +1,21 @@
 # First mobile app with Matchmore
 
-In this post, I will go through setting up an iOS application with Matchmore SDK, from registration on the portal to obtaining a match.
+In this post, we will go through setting up an iOS application with AlpsSDK, from registration on the portal to obtaining a match.
 
 ## Before you start
-Matchmore SDK is distributed with cocoapods. It is `pod 'AlpsSDK', '~> 0.6'`, to install cocoapods execute in terminal:
+We will use cocoapods to install it execute in terminal:
 ```
 sudo gem install cocoapods
 ```
 
 ## Get API key
-Now let's create a new application on developer portal and obtain API key that we will later use in SDK.
-After loging in (you can register for free) I do:
+Now let's create a new application on developer portal and get API key that we will later use in SDK.
+After loging in (you can register for free) you do:
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/create-app.gif "create app")
 
 ## Xcode mobile app
-Then create new iOS single view application in Xcode (select swift as language) after that close Xcode and go to main application directory with terminal (in this case my-app) and execute `pod init` which creates `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
+Now we create new iOS single view application in Xcode (select swift as language) after that close Xcode and go to main application directory with terminal (in this case my-app). Execute `pod init` which will create `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
 
 After the edit, it may look like this
 ```
@@ -27,7 +27,7 @@ target 'my-app' do
   ...
 ```
 
-After that execute `pod install`, this will download AlpsSDK and generate `my-app.xcworkspace` that from now on we will use to open the project in Xcode (the old my-app.xcodeproj will not work correctly).
+After that execute `pod install`, this will download AlpsSDK and generate `my-app.xcworkspace` that you have to import in Xcode (the old my-app.xcodeproj will not work correctly).
 
 After importing `my-app.xcworkspace` into Xcode, we will add necessary permissions for the app in `info.plist` file. Right click on `info.plist` select `Open As > Source Code` and add two keys at the end:
 
@@ -43,7 +43,7 @@ After importing `my-app.xcworkspace` into Xcode, we will add necessary permissio
 ```
 
 ## SDK configuration
-Next we have to initialize SDK to do that in `AppDelegate.swift` in `application` funtion add thos two lines:
+Next we have to initialize SDK. To do that in `AppDelegate.swift` in `application` funtion add thos two lines:
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -53,17 +53,17 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
   return true
 }
 ```
-This is the place where we have to pass application key that was generated in the portal for our app.
+The first line creates a configuration with your API key second configures AlpsSDK.
 There will be compilation error because Xcode does not know what `MatchMoreConfig` is, to fix that add `import AlpsSDK` import.
 
-Now that SDK is set up we will create a label and two buttons in `Main.storyboard`.
+Now that SDK is set up we will create a label and two buttons in main application view in `Main.storyboard`.
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/app-main-page.png "app main view")
 
 ## Create publication
-Let's write the code that will create publication and subscription after clicking on buttons.
+Let's write the code that will create publication and subscription when clicking on buttons.
 
-So first I create `IBAction` for publish button:
+So first you create `IBAction` for publish button:
 ```swift
 @IBAction func publish() {
     MatchMore.createPublicationForMainDevice(publication: Publication(topic: "Test Topic", range: 20, duration: 100, properties: ["test": "true"]), completion: { result in
@@ -77,7 +77,7 @@ So first I create `IBAction` for publish button:
 }
 ```
 
-This function will create publication attached to phone location with range 20 meters and duration 100 seconds (this publication will be deleted after 100 seconds). This publication will be on topic `Test Topic` which means that it will only match with subscriptions on the same topic, it also has a property named `test` set to `true`. The publication can have an arbitrary number of properties with arbitrary names that can be used to store information and to restrict further when the match should happen by adjusting selector in the subscription.
+This function will create publication attached to phone location with range 20 meters and duration 100 seconds (will be removed after 100 seconds). This publication will be on topic `Test Topic` which means that it will only match with subscriptions on the same topic. It also has a property named `test` set to `true`, publications can have an arbitrary number of properties with arbitrary names that can be used to store information in them and to restrict further when the match should happen by adjusting selector in the subscription.
 
 ## Create subscription
 Next is `IBAction` for subscribe button:
@@ -96,10 +96,9 @@ Next is `IBAction` for subscribe button:
 }
 ```
 
-This function creates a subscription with range 20 meters and duration 100 seconds on topic `Test Topic`. The subscription also has a selector that will allow match only with publications that have property `test` and this property is set to `true`. 
-The selector can be more complex than this and contains logical operators like `and` and `or`.
-More complex selector may looks like this: `test = true and (color = 'red' or size > 10)`, it requires additional properties `color` and `size`. 
-New thing for subscription is `pusher`, as subscription receives matches we have to set how the match will be delivered to the mobile device, `ws` means that SDK will use web sockets. Delivery with Apple push notifications and polling is also supported. For this example, I chose web sockets because they require no set up (like APNs certs and so on).
+This function creates a subscription with similar parameters like publication. Instead of properties subscription has a selector, in case of this one selector will allow match only with publications that have property `test` and this property is set to `true`. 
+The selector can be more complex, for example it may looks like this: `test = true and (color = 'red' or size > 10)`, it requires additional properties `color` and `size`. 
+Another difference for subscription is that it receives matches, so we have to set how they will be delivered to the mobile device. Yo have to use `pusher` for that. Here it is set to `ws` which means that SDK will use web sockets to get matches. Apple push notifications and polling are also supported. For this example, we chose web sockets because they require no set up (like APNs certs and so on).
 
 ## Handle matches
 Now that we can create publications and subscriptions on devices the last pice is the code responsible for processing matches that are delivered to the application, in our case, it looks like this:
@@ -125,13 +124,13 @@ override func viewDidLoad() {
 }
 ```
 
-First, we implement protocol `MatchDelegate` in `ViewController` and inside `viewDidLoad` define what should happen when the application gets a match (change label text). Next, I am starting the main device that will represent phone on the backend, and after checking that it was created add match delegate, start listening to matches and start sending location updates.
+First, we implement protocol `MatchDelegate` in `ViewController` and inside `viewDidLoad` define what should happen when the application gets a match (change label text). Next, we are starting the main device that will represent phone on the backend, and after checking that it was created we add match delegate, start listening to matches and start sending location updates.
 
 ## Test
 The scenario is like this
 1. Create subscription
 2. Create publication
-3. Move phones/simulators to be no further than 20m from each other within 100 seconds
+3. Move phones/simulators to be no further than 40 meters from each other within 100 seconds
 4. Observe a match
 
 Now lets start two simulators and check:
@@ -140,7 +139,7 @@ Now lets start two simulators and check:
 
 The match is instant because both simulators are in the same location.
 
-So what happened on that gif is: first we created a subscription on one phone and then publication on the other phone. Since publication, and subscription ware on the same topic and in range of each other match occurred instantly. The application that created the subscription received the match that contains all information about the publication that was matched including publication properties. We can see how full match looks like in log:
+So what happened on that gif is: first we created a subscription on one phone and then publication on the other phone. Since publication, and subscription ware on the same topic and in range of each other match occurred instantly. The application that created the subscription received the match that contains all information about the publication that was matched including publication properties. We can see how full match looks like in the log:
 
 ```
 🏔 You've got new matches!!! 🏔
@@ -173,7 +172,7 @@ So what happened on that gif is: first we created a subscription on one phone an
 ## Whats next
 So to sum up:
 
-AlpsSDK allows us to easily attach pieces of information to phones, iBeacons and static locations (but this is for another blog post) in the form of publications and query them with subscriptions. Information is delivered to the device that has attached subscription when it is in the proximity of matching publication.
+AlpsSDK allows us to quickly attach pieces of information to phones, iBeacons and static locations (but this is for another blog post) in the form of publications and query them with subscriptions. Information is delivered to the device that has attached subscription when it is in the proximity of matching publication.
 
 Subscription and publication are matching if they are on the same topic, they are in proximity and properties in the publication are valid for the selector in the subscription.
 
