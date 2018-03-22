@@ -139,6 +139,7 @@ Now lets start two simulators and check:
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/post/match-setup/20180321/img/match.gif "match")
 
 The match is instant because both simulators are in the same location.
+
 So what happened on that gif is: first we created a subscription on one phone and then publication on the other phone. Since publication, and subscription ware on the same topic and in range of each other match occurred instantly. The application that created the subscription received the match that contains all information about the publication that was matched including publication properties. We can see how full match looks like in log:
 
 ```
@@ -168,3 +169,14 @@ So what happened on that gif is: first we created a subscription on one phone an
   ]
 ]]
 ```
+
+## Whats next
+So to sum up:
+
+AlpsSDK allow us to easly attach pices of information to phones (also to iBeacons and static locations, but this is for other blog post) in form of publications and query them with subscriptions. Information is deliverd to the device that has subscription when it is in proximity of matching publication. 
+One way of simplification is treat publications like database records that are attached to phosocal objects that moves around and are grouped by topic, and subscription is like query that get results in form of match when it is in proximity of publication.
+As with database you can model many business cases with publications and subscriptions. For example publication can be on  taxi driver phone and subscription on passanger phone so she can see drivers in range of 3000 meters. Publication can hold promotion information that is attached to location that expires after 5 hours and subscription is on customer phone that will get notification if she is near.
+
+Possibilities are endles.
+
+Full code of demo described above is [here](https://github.com/matchmore/tech-blog/tree/post/match-setup/20180321/code/my-app)
