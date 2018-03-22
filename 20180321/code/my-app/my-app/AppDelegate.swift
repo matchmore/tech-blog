@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let config = MatchMoreConfig(apiKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJhbHBzIiwic3ViIjoiODhiMGQ3MjAtNDU5OC00NTM2LThkOTEtNDc5NjIxYTRiYjYzIiwiYXVkIjpbIlB1YmxpYyJdLCJuYmYiOjE1MjE2MzM4MDMsImlhdCI6MTUyMTYzMzgwMywianRpIjoiMSJ9.QI9yUu9qf--7QH5Z9WhV1M_aD5ddPIK0XAc-Uhgb--SI0NL7UQzZ8BM4TgkxcdEf0Kg80txZzDOyihkUPEsRHw")
+        let config = MatchMoreConfig(apiKey: "api-key-from-portal")
         MatchMore.configure(config)
         
         return true
