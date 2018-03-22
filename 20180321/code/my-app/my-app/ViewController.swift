@@ -40,22 +40,17 @@ class ViewController: UIViewController , MatchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.onMatch = { [weak self] matches, _ in
+            print("🏔 You've got new matches!!! 🏔\n\(matches.map { $0.encodeToJSON() })")
+            self?.label.text = "🏔 You've got new matches!!! 🏔"
+        }
         MatchMore.startUsingMainDevice { result in
             guard case .success(let mainDevice) = result else { print(result.errorMessage ?? ""); return }
             print("🏔 Using device: 🏔\n\(mainDevice.encodeToJSON())")
-            
-            // Start Monitoring Matches
-            self.onMatch = { [weak self] matches, _ in
-                print("🏔 You've got new matches!!! 🏔\n\(matches.map { $0.encodeToJSON() })")
-                self?.label.text = "🏔 You've got new matches!!! 🏔"
-            }
             MatchMore.matchDelegates += self
-            
             MatchMore.startListeningForNewMatches()
             MatchMore.startUpdatingLocation()
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
