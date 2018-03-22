@@ -12,7 +12,7 @@ sudo gem install cocoapods
 Now let's create a new application on developer portal and obtain API key that we will later use in SDK.
 After loging in (you can register for free) I do:
 
-![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/post/match-setup/20180321/img/create-app.gif "create app")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/create-app.gif "create app")
 
 ## Xcode mobile app
 Then create new iOS single view application in Xcode (select swift as language) after that close Xcode and go to main application directory with terminal (in this case my-app) and execute `pod init` which creates `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
@@ -58,7 +58,7 @@ There will be compilation error because Xcode does not know what `MatchMoreConfi
 
 Now that SDK is set up we will create a label and two buttons in `Main.storyboard`.
 
-![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/post/match-setup/20180321/img/app-main-page.png "app main view")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/app-main-page.png "app main view")
 
 ## Create publication
 Let's write the code that will create publication and subscription after clicking on buttons.
@@ -136,7 +136,7 @@ The scenario is like this
 
 Now lets start two simulators and check:
 
-![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/post/match-setup/20180321/img/match.gif "match")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/match.gif "match")
 
 The match is instant because both simulators are in the same location.
 
