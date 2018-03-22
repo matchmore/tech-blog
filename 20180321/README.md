@@ -183,4 +183,4 @@ Publication attached to the phone that sets adjust heating when you leave and en
 
 Possibilities are endless.
 
-Full code of demo described above is [here](https://github.com/matchmore/tech-blog/tree/post/match-setup/20180321/code/my-app)
+Full code of demo described above is [here](https://github.com/matchmore/tech-blog/tree/master/20180321/code)
