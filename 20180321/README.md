@@ -84,20 +84,25 @@ Last Pice is the code responsible for processing matches that are delivered to a
 ```swift
 class ViewController: UIViewController , MatchDelegate {
   var onMatch: OnMatchClosure?
+
 ...
 
-  override func viewDidLoad() {
-      super.viewDidLoad()
-      MatchMore.startUsingMainDevice { result in
-          guard case .success(let mainDevice) = result else { print(result.errorMessage ?? ""); return }
-          // Start Monitoring Matches
-          self.onMatch = { [weak self] matches, _ in
-              print("🏔 You've got new matches!!! 🏔\n\(matches.map { $0.encodeToJSON() })")
-              self?.label.text = "🏔 You've got new matches!!! 🏔"
-          }
-          MatchMore.matchDelegates += self
-          MatchMore.startListeningForNewMatches()
-          MatchMore.startUpdatingLocation()
-      }
-  }
+override func viewDidLoad() {
+    super.viewDidLoad()
+    self.onMatch = { [weak self] matches, _ in
+        print("🏔 You've got new matches!!! 🏔\n\(matches.map { $0.encodeToJSON() })")
+        self?.label.text = "🏔 You've got new matches!!! 🏔"
+    }
+    MatchMore.startUsingMainDevice { result in
+        guard case .success(let mainDevice) = result else { print(result.errorMessage ?? ""); return }
+        print("🏔 Using device: 🏔\n\(mainDevice.encodeToJSON())")
+        MatchMore.matchDelegates += self
+        MatchMore.startListeningForNewMatches()
+        MatchMore.startUpdatingLocation()
+    }
+}
 ```
+
+First I implement protocol `MatchDelegate` in `ViewController` and inside `viewDidLoad` assign what should happen when application will get a match (log message and change label text), after that I am starting main device that will represent my phone on backend and after checkin that it was created I add match delegate, start listening for matches and start sending location updtes.
+
+Now I can start two simulators and chec if I get a match:
