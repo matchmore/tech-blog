@@ -174,9 +174,12 @@ So what happened on that gif is: first we created a subscription on one phone an
 So to sum up:
 
 AlpsSDK allows us to easily attach pieces of information to phones, iBeacons and static locations (but this is for another blog post) in the form of publications and query them with subscriptions. Information is delivered to the device that has attached subscription when it is in the proximity of matching publication.
+
 Subscription and publication are matching if they are on the same topic, they are in proximity and properties in the publication are valid for the selector in the subscription.
+
 One way of simplification is to treat publications like database records that are attached to physical objects that move around (like a phone). Subscription is like a query that gets results in the form of the match when it is in the proximity of publication.
 As with database, you can model many business cases with publications and subscriptions. 
+
 For example, the publication can be on taxi driver phone and subscription on passenger phone so that she can see drivers in a range of 3000 meters. 
 A publication can hold promotion information that is attached to a location that expires after 5 hours and subscription is on customer phone that will get a notification if she is near before publication expires.
 Publication attached to the phone that sets adjust heating when you leave and enter the house.
