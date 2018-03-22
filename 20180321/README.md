@@ -38,3 +38,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 
 also, I have to add `import AlpsSDK` import at the top of `AppDelegate.swift` file.
+
+Now that I have SDK set up will create label and 2 buttons in `Main.storyboard`, buttons will create publication/subscription and label will show if app got a match.
+
+
