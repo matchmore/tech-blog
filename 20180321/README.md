@@ -132,7 +132,7 @@ The scenario is like this
 1. Create subscription
 2. Create publication
 3. Move phones/simulators to be no further than 20m from each other within 100 seconds
-4. Obser a match
+4. Observe a match
 
 Now lets start two simulators and check:
 
