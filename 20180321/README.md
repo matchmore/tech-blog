@@ -59,10 +59,11 @@ So first I create `IBAction` for publish and subscribe button. Code for creating
 }
 ```
 
-This will create publication at my phone location with range 20 meters and duration 100 seconds, this publication will be on topic `Test Topic` which means that it will only match with subscriptions on the same topic, this publication also have property named `test` set to `true`, I can have arbitrary number of properties with arbitrary names that can be used to store informations in publications and to further restrict when match should happen.
+This will create publication attached to phone location with range 20 meters and duration 100 seconds, this publication will be on topic `Test Topic` which means that it will only match with subscriptions on the same topic, this publication also have property named `test` set to `true`, I can have arbitrary number of properties with arbitrary names that can be used to store informations in publications and to further restrict when match should happen.
+
 
 Code for creating subscription loks like this:
-```
+```swift
 @IBAction func subscribe() {
     let subscription = Subscription(topic: "Test Topic", range: 20, duration: 100, selector: "test = true")
     subscription.pushers = ["ws"]
@@ -77,3 +78,4 @@ Code for creating subscription loks like this:
 }
 ```
 
+This will create subscrption attached to phone location with range 20 meters and duration 100 seconds on topic `Test Topic`, this publication also have a selector that will allow match only with publications that have property test and this property is set to true. Selector can be more complex than this for example `test = true and (color = 'red' or size > 10)` this selector will allow match only with publication that has property test set to true and also have property color and size that one of them has to satisife the condition.
