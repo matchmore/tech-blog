@@ -27,7 +27,7 @@ target 'my-app' do
 After that I can install AlpsSDK and its dependencies by executing `pod install`, this will also generate `my-app.xcworkspace` that from now on I will use to open this project in Xcode (the old my-app.xcodeproj will not work properly).
 
 After importing `my-app.xcworkspace` into Xcode I have to add SDK initialization to `AppDelegate.swift`, so I change `application` funtion to look like this:
-```
+```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
   let config = MatchMoreConfig(apiKey: "paste_API_key_from_portal_here")
@@ -37,8 +37,43 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-also, I have to add `import AlpsSDK` import at the top of `AppDelegate.swift` file.
+Above I pass API key to configuration. Also, I have to add `import AlpsSDK` import at the top of `AppDelegate.swift` file.
 
-Now that I have SDK set up will create label and 2 buttons in `Main.storyboard`, buttons will create publication/subscription and label will show if app got a match.
+Now that I have SDK set up will create label and 2 buttons in `Main.storyboard`.
 
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/post/match-setup/20180321/img/app-main-page.png "app main view")
+
+Lets write the code that will create publication and subscription after clicking on those buttons and code that will update label when application will get a match.
+
+So first I create `IBAction` for publish and subscribe button. Code for creating pblication looks like this:
+```swift
+@IBAction func publish() {
+    MatchMore.createPublicationForMainDevice(publication: Publication(topic: "Test Topic", range: 20, duration: 100, properties: ["test": "true"]), completion: { result in
+        switch result {
+        case .success(let publication):
+            print("🏔 Pub was created: 🏔\n\(publication.encodeToJSON())")
+        case .failure(let error):
+            print("🌋 \(String(describing: error?.message)) 🌋")
+        }
+    })
+}
+```
+
+This will create publication at my phone location with range 20 meters and duration 100 seconds, this publication will be on topic `Test Topic` which means that it will only match with subscriptions on the same topic, this publication also have property named `test` set to `true`, I can have arbitrary number of properties with arbitrary names that can be used to store informations in publications and to further restrict when match should happen.
+
+Code for creating subscription loks like this:
+```
+@IBAction func subscribe() {
+    let subscription = Subscription(topic: "Test Topic", range: 20, duration: 100, selector: "test = true")
+    subscription.pushers = ["ws"]
+    MatchMore.createSubscriptionForMainDevice(subscription: subscription, completion: { result in
+        switch result {
+        case .success(let sub):
+            print("🏔 Socket Sub was created 🏔\n\(sub.encodeToJSON())")
+        case .failure(let error):
+            print("🌋 \(String(describing: error?.message)) 🌋")
+        }
+    })
+}
+```
 
