@@ -1,18 +1,18 @@
-# From 0 to Match - Set Up Everything with Apple Xcode
+# First mobile app with Matchmore
 
 In this post, I will go through setting up an iOS application with Matchmore SDK, from registration on the portal to obtaining a match.
 
-Matchmore SDK is distributed with cocoapods. It is `pod 'AlpsSDK', '~> 0.6'`, to install cocoapods I can execute in terminal:
+Matchmore SDK is distributed with cocoapods. It is `pod 'AlpsSDK', '~> 0.6'`, to install cocoapods execute in terminal:
 ```
 sudo gem install cocoapods
 ```
 
-What I have to do is create a new application on developer portal and obtain API key that I will later use in SDK.
-After loging in / registering I do:
+Now lets create new application on developer portal and obtain API key that we will later use in SDK.
+After loging in (you can register for free) I do:
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/post/match-setup/20180321/img/create-app.gif "create app")
 
-Then I create new iOS single view swift application in Xcode after that I close Xcode go to main application directory with terminal (in this case my-app) and execute `pod init` which creates `Podfile` file. To add AlpsSDK to my application, I have to add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
+Then create new iOS single view application in Xcode (select swift as laguage) after that close Xcode and go to main application directory with terminal (in this case my-app) and execute `pod init` which creates `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
 
 After the edit, it may look like this
 ```
@@ -24,9 +24,9 @@ target 'my-app' do
   ...
 ```
 
-After that I can install AlpsSDK and its dependencies by executing `pod install`, this will also generate `my-app.xcworkspace` that from now on I will use to open this project in Xcode (the old my-app.xcodeproj will not work properly).
+After that execute `pod install`, this will download AlpsSDK and generate `my-app.xcworkspace` that from now on we will use to open project in Xcode (the old my-app.xcodeproj will not work properly).
 
-After importing `my-app.xcworkspace` into Xcode, I will add necessary permissions for the app in `info.plist` file, so after right click on it select `Open As > Source Code` and add two keys at the end:
+After importing `my-app.xcworkspace` into Xcode, we will add necessary permissions for the app in `info.plist` file. Right click on `info.plist` select `Open As > Source Code` and add two keys at the end:
 
 ```
 ...
@@ -39,7 +39,7 @@ After importing `my-app.xcworkspace` into Xcode, I will add necessary permission
 </plist>
 ```
 
-I have to add SDK initialization to `AppDelegate.swift`, so I change `application` funtion to look like this:
+Next we have to initialize SDK to do that in `AppDelegate.swift` in `application` funtion add thos two lines:
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -49,10 +49,10 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
   return true
 }
 ```
+This is the place where we have to pass application key that was generated in portal for ours app.
+There will be compilation erro because Xcode does not know what `MatchMoreConfig` is, to fix that add `import AlpsSDK` import.
 
-Above I pass API key to the configuration. Also, I have to add `import AlpsSDK` import at the top of `AppDelegate.swift` file.
-
-Now that I have SDK set up will create a label and two buttons in `Main.storyboard`.
+Now that SDK is set up we will create a label and two buttons in `Main.storyboard`.
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/post/match-setup/20180321/img/app-main-page.png "app main view")
 
