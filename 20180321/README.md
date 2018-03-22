@@ -78,4 +78,26 @@ Code for creating subscription loks like this:
 }
 ```
 
-This will create subscrption attached to phone location with range 20 meters and duration 100 seconds on topic `Test Topic`, this publication also have a selector that will allow match only with publications that have property test and this property is set to true. Selector can be more complex than this for example `test = true and (color = 'red' or size > 10)` this selector will allow match only with publication that has property test set to true and also have property color and size that one of them has to satisife the condition.
+This will create subscrption attached to phone location with range 20 meters and duration 100 seconds on topic `Test Topic`, this publication also have a selector that will allow match only with publications that have property test and this property is set to true. Selector can be more complex than this for example `test = true and (color = 'red' or size > 10)` this selector will allow match only with publication that has property test set to true and also have property color and size and one of them has to satisife the condition. Additional property that is set on subscription is `pusher` this tels backend how it should deliver matches to application, ws means that it should use web sockets, SDK also supports delivery with Apple push notifications and polling. For this example I chose web sockets because they requires no set up (like APNs certs and so on).
+
+Last Pice is the code responsible for processing matches that are delivered to application, in my case it looks like this:
+```swift
+class ViewController: UIViewController , MatchDelegate {
+  var onMatch: OnMatchClosure?
+...
+
+  override func viewDidLoad() {
+      super.viewDidLoad()
+      MatchMore.startUsingMainDevice { result in
+          guard case .success(let mainDevice) = result else { print(result.errorMessage ?? ""); return }
+          // Start Monitoring Matches
+          self.onMatch = { [weak self] matches, _ in
+              print("🏔 You've got new matches!!! 🏔\n\(matches.map { $0.encodeToJSON() })")
+              self?.label.text = "🏔 You've got new matches!!! 🏔"
+          }
+          MatchMore.matchDelegates += self
+          MatchMore.startListeningForNewMatches()
+          MatchMore.startUpdatingLocation()
+      }
+  }
+```
