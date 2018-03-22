@@ -3,7 +3,7 @@
 In this post, we will go through setting up an iOS application with AlpsSDK, from registration on the portal to obtaining a match.
 
 ## Before you start
-We will use cocoapods to install it execute in terminal:
+We will use cocoapods, to install it execute in terminal:
 ```
 sudo gem install cocoapods
 ```
