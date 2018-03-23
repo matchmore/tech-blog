@@ -66,7 +66,8 @@ Let's write the code that will create publication and subscription when clicking
 So first you create `IBAction` for publish button:
 ```swift
 @IBAction func publish() {
-    MatchMore.createPublicationForMainDevice(publication: Publication(topic: "Test Topic", range: 20, duration: 100, properties: ["test": "true"]), completion: { result in
+    let properties: [String: Any] = ["test": true]
+    MatchMore.createPublicationForMainDevice(publication: Publication(topic: "Test Topic", range: 20, duration: 100, properties: properties), completion: { result in
         switch result {
         case .success(let publication):
             print("🏔 Pub was created: 🏔\n\(publication.encodeToJSON())")
