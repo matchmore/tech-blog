@@ -3,19 +3,19 @@
 In this post, we will go through setting up an iOS application with AlpsSDK, from registration on the portal to obtaining a match.
 
 ## Before you start
-We will use cocoapods, to install it execute in terminal:
+We will use CocoaPods. In order to install this package manager you'll need to execute this command in terminal:
 ```
 sudo gem install cocoapods
 ```
 
 ## Get API key
-Now let's create a new application on developer portal and get API key that we will later use in SDK.
+Now let's create a new application on Matchmore Portal and obtain API key that we will use to configure SDK later on.
 After loging in (you can register for free) you do:
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/create-app.gif "create app")
 
 ## Xcode mobile app
-Now we create new iOS single view application in Xcode (select swift as language) after that close Xcode and go to main application directory with terminal (in this case my-app). Execute `pod init` which will create `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
+Now let's create a fresh single view project in Xcode (I highly recommend using Swift🤓) after that close Xcode and go to main application directory with terminal (in this case my-app). Execute `pod init` which will create `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
 
 After the edit, it may look like this
 ```
@@ -27,9 +27,9 @@ target 'my-app' do
   ...
 ```
 
-After that execute `pod install`, this will download AlpsSDK and generate `my-app.xcworkspace` that you have to import in Xcode (the old my-app.xcodeproj will not work correctly).
+After that execute `pod install`, this will download AlpsSDK and generate `my-app.xcworkspace` that you have to open in Xcode (the old my-app.xcodeproj will not work correctly).
 
-After importing `my-app.xcworkspace` into Xcode, we will add necessary permissions for the app in `info.plist` file. Right click on `info.plist` select `Open As > Source Code` and add two keys at the end:
+After importing `my-app.xcworkspace` into Xcode, we will add necessary permissions for the app in `Info.plist` file. Right click on `info.plist` select `Open As > Source Code` and add two keys at the end:
 
 ```
 ...
@@ -43,7 +43,7 @@ After importing `my-app.xcworkspace` into Xcode, we will add necessary permissio
 ```
 
 ## SDK configuration
-Next we have to initialize SDK. To do that in `AppDelegate.swift` in `application` funtion add thos two lines:
+Next we have to initialize SDK. To do that in `AppDelegate.swift` in `application(_:didFinishLaunchingWithOptions:)` funtion add thos two lines:
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -176,10 +176,10 @@ AlpsSDK allows us to quickly attach pieces of information to phones, iBeacons an
 
 Subscription and publication are matching if they are on the same topic, they are in proximity and properties in the publication are valid for the selector in the subscription.
 
-One way of simplification is to treat publications like database records that are attached to physical objects that move around (like a phone). Subscription is like a query that gets results in the form of the match when it is in the proximity of publication.
+One way to simplify this is treating publication like database records that are attached to physical objects that move around (like a phone). Subscription is like a query that gets results in the form of the match when it is in the proximity of publication.
 As with database, you can model many business cases with publications and subscriptions. 
 
-For example, the publication can be on taxi driver phone and subscription on passenger phone so that she can see drivers in a range of 3000 meters. 
+For example, the publication can be on taxi driver's phone and subscription on passenger phone so that she can see drivers in a range of 3000 meters. 
 A publication can hold promotion information that is attached to a location that expires after 5 hours and subscription is on customer phone that will get a notification if she is near before publication expires.
 Publication attached to the phone that sets adjust heating when you leave and enter the house.
 
