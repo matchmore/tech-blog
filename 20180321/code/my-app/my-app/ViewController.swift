@@ -26,7 +26,8 @@ class ViewController: UIViewController , MatchDelegate {
     }
     @IBAction func publish() {
         // range 20 meters duration 100 seconds
-        MatchMore.createPublicationForMainDevice(publication: Publication(topic: "Test Topic", range: 20, duration: 100, properties: ["test": "true"]), completion: { result in
+        let properties: [String: Any] = ["test": true]
+        MatchMore.createPublicationForMainDevice(publication: Publication(topic: "Test Topic", range: 20, duration: 100, properties: properties), completion: { result in
             switch result {
             case .success(let publication):
                 print("🏔 Pub was created: 🏔\n\(publication.encodeToJSON())")
