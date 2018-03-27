@@ -3,21 +3,21 @@
 In this post, we will go through setting up an iOS application with AlpsSDK, from registration on the portal to obtaining a match.
 
 ## Before you start
-We will use CocoaPods. In order to install this package manager you'll need to execute this command in terminal:
+We will use CocoaPods. In order to install this package manager you'll need to execute this command in the terminal:
 ```
 sudo gem install cocoapods
 ```
 
 ## Get API key
-Now let's create a new application on Matchmore Portal and obtain API key that we will use to configure SDK later on.
-After loging in (you can register for free) you do:
+Now let's create a new application on Matchmore Portal and obtain the API key that we will use to configure SDK later on.
+After logging in ([register for free here](http://matchmore.com/account/register/)) you do the following:
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/create-app.gif "create app")
 
 ## Xcode mobile app
-Now let's create a fresh single view project in Xcode (I highly recommend using Swift🤓) after that close Xcode and go to main application directory with terminal (in this case my-app). Execute `pod init` which will create `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile` 
+Now let's create a fresh single view project in Xcode (I highly recommend using Swift🤓). After that, close Xcode and go to the main application directory with terminal, in this case my-app. Execute `pod init` which will create `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile`. 
 
-After the edit, it may look like this
+After the edit, it may look like this:
 ```
 target 'my-app' do
   # Comment the next line if you're not using Swift ...
@@ -27,9 +27,9 @@ target 'my-app' do
   ...
 ```
 
-After that execute `pod install`, this will download AlpsSDK and generate `my-app.xcworkspace` that you have to open in Xcode (the old my-app.xcodeproj will not work correctly).
+Afterwards, execute `pod install`, this will download the AlpsSDK and generate `my-app.xcworkspace` which you have to open in Xcode (the old my-app.xcodeproj will not work correctly).
 
-After importing `my-app.xcworkspace` into Xcode, we will add necessary permissions for the app in `Info.plist` file. Right click on `info.plist` select `Open As > Source Code` and add two keys at the end:
+After importing `my-app.xcworkspace` into Xcode, we will add necessary permissions for the app in `Info.plist` file. Right-click on `info.plist` select `Open As > Source Code` and add two keys at the end:
 
 ```
 ...
@@ -43,7 +43,7 @@ After importing `my-app.xcworkspace` into Xcode, we will add necessary permissio
 ```
 
 ## SDK configuration
-Next we have to initialize SDK. To do that in `AppDelegate.swift` in `application(_:didFinishLaunchingWithOptions:)` funtion add thos two lines:
+Next we have to initialize the SDK. To do so in `AppDelegate.swift` in `application(_:didFinishLaunchingWithOptions:)` function, you have to add those two lines:
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -53,17 +53,18 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
   return true
 }
 ```
-The first line creates a configuration with your API key second configures AlpsSDK.
-There will be compilation error because Xcode does not know what `MatchMoreConfig` is, to fix that add `import AlpsSDK` import.
+The first line creates a configuration with your API key, and the second configures the AlpsSDK.
 
-Now that SDK is set up we will create a label and two buttons in main application view in `Main.storyboard`.
+There will be a compilation error because Xcode does not know what `MatchMoreConfig` is. To fix this, add `import AlpsSDK` import.
+
+Now that the SDK is set up, we will create a label and two buttons in the main application view in `Main.storyboard`.
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/app-main-page.png "app main view")
 
-## Create publication
-Let's write the code that will create publication and subscription when clicking on buttons.
+## Create a publication
+Let's write the code that will create a publication and a subscription when clicking on the buttons.
 
-So first you create `IBAction` for publish button:
+The first step is to create `IBAction` for the publish button:
 ```swift
 @IBAction func publish() {
     let properties: [String: Any] = ["test": true]
@@ -78,10 +79,12 @@ So first you create `IBAction` for publish button:
 }
 ```
 
-This function will create publication attached to phone location with range 20 meters and duration 100 seconds (will be removed after 100 seconds). This publication will be on topic `Test Topic` which means that it will only match with subscriptions on the same topic. It also has a property named `test` set to `true`, publications can have an arbitrary number of properties with arbitrary names that can be used to store information in them and to restrict further when the match should happen by adjusting selector in the subscription.
+This function will create a publication attached to the phone location with a range of 20 meters and a duration of 100 seconds (the publication will be removed after 100 seconds). This publication will be the topic `Test Topic` which means that it will only match with subscriptions with the same topic. 
+
+It also has a property named `test` set to `true`. Publications can have an arbitrary number of properties with arbitrary names which can be used to store information in them. They can also be used to further restrict when the match should happen by adjusting the selector in the subscription.
 
 ## Create subscription
-Next is `IBAction` for subscribe button:
+The next step is to add `IBAction` for the subscribe button:
 ```swift
 @IBAction func subscribe() {
     let subscription = Subscription(topic: "Test Topic", range: 20, duration: 100, selector: "test = true")
@@ -97,12 +100,14 @@ Next is `IBAction` for subscribe button:
 }
 ```
 
-This function creates a subscription with similar parameters like publication. Instead of properties subscription has a selector, in case of this one selector will allow match only with publications that have property `test` and this property is set to `true`. 
+This function creates a subscription with similar parameters like the publication. Instead of properties, the subscription has a selector. In the case of this selector, it will allow matches only with publications that have property `test` and this property is set to `true`. 
+
 The selector can be more complex, for example it may looks like this: `test = true and (color = 'red' or size > 10)`, it requires additional properties `color` and `size`. 
-Another difference for subscription is that it receives matches, so we have to set how they will be delivered to the mobile device. Yo have to use `pusher` for that. Here it is set to `ws` which means that SDK will use web sockets to get matches. Apple push notifications and polling are also supported. For this example, we chose web sockets because they require no set up (like APNs certs and so on).
+
+Another difference for subscription is that it receives matches, so we have to set how they will be delivered to the mobile device. You have to use `pusher` for that. Here it is set to `ws` which means that the SDK will use web sockets to get matches. Apple push notifications and polling are also supported. For this example, we chose web sockets because they require no set up (like APNs certs and so on).
 
 ## Handle matches
-Now that we can create publications and subscriptions on devices the last pice is the code responsible for processing matches that are delivered to the application, in our case, it looks like this:
+Now that we can create publications and subscriptions on devices, the last piece is the code responsible for processing matches that are delivered to the application. In our case, it looks like this:
 ```swift
 class ViewController: UIViewController , MatchDelegate {
   var onMatch: OnMatchClosure?
@@ -125,22 +130,26 @@ override func viewDidLoad() {
 }
 ```
 
-First, we implement protocol `MatchDelegate` in `ViewController` and inside `viewDidLoad` define what should happen when the application gets a match (change label text). Next, we are starting the main device that will represent phone on the backend, and after checking that it was created we add match delegate, start listening to matches and start sending location updates.
+First, we implement the `MatchDelegate` protocol in `ViewController` and inside `viewDidLoad` we define what should happen when the application gets a match (change label text). 
+
+Next, we start the main device that will represent the phone on the backend. After checking that it was created, we add match delegate, start to listen to matches and start to send location updates.
 
 ## Test
-The scenario is like this
-1. Create subscription
-2. Create publication
+The scenario is like this:
+1. Create a subscription
+2. Create a publication
 3. Move phones/simulators to be no further than 40 meters from each other within 100 seconds
 4. Observe a match
 
-Now lets start two simulators and check:
+Now lets start two simulators and check how it works:
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/match.gif "match")
 
 The match is instant because both simulators are in the same location.
 
-So what happened on that gif is: first we created a subscription on one phone and then publication on the other phone. Since publication, and subscription ware on the same topic and in range of each other match occurred instantly. The application that created the subscription received the match that contains all information about the publication that was matched including publication properties. We can see how full match looks like in the log:
+So what happened on the gif was: 
+
+First we created a subscription on one phone and then a publication on the other phone. Since the publication and the subscription were on the same topic and in range of each other, a match occurred instantly. The application that created the subscription received the match that contains all information about the publication that was matched including publication properties. We can see how a full match looks like in the log:
 
 ```
 🏔 You've got new matches!!! 🏔
@@ -173,17 +182,18 @@ So what happened on that gif is: first we created a subscription on one phone an
 ## Whats next
 So to sum up:
 
-AlpsSDK allows us to quickly attach pieces of information to phones, iBeacons and static locations (but this is for another blog post) in the form of publications and query them with subscriptions. Information is delivered to the device that has attached subscription when it is in the proximity of matching publication.
+AlpsSDK allows us to quickly attach pieces of information to phones, iBeacons and static locations (but this is for another blog post) in the form of publications and query them with subscriptions. Information is delivered to the device that has attached a subscription when it is in the proximity of a matching publication.
 
 Subscription and publication are matching if they are on the same topic, they are in proximity and properties in the publication are valid for the selector in the subscription.
 
-One way to simplify this is treating publication like database records that are attached to physical objects that move around (like a phone). Subscription is like a query that gets results in the form of the match when it is in the proximity of publication.
-As with database, you can model many business cases with publications and subscriptions. 
+One way to simplify this is to treat publication like database records that are attached to physical objects that move around (like a phone). A subscription is like a query that gets results in the form of the match when it is in the proximity of publication. As with a database, you can model many business cases with publications and subscriptions. 
 
-For example, the publication can be on taxi driver's phone and subscription on passenger phone so that she can see drivers in a range of 3000 meters. 
-A publication can hold promotion information that is attached to a location that expires after 5 hours and subscription is on customer phone that will get a notification if she is near before publication expires.
-Publication attached to the phone that sets adjust heating when you leave and enter the house.
+For example, the publication could be on a taxi driver's phone and the subscription on a passenger's phone, so that the passenger can see available drivers within a range of 3000 meters. 
+
+Another example could be a publication with promotion information that is attached to a location which expires after 5 hours, and a subscription could be attached to a customer's phone which will get a notification if he or she is near the location before the publication expires.
+
+The last example could be a publication attached to a phone that adjust the heating when you leave and enter the house.
 
 Possibilities are endless.
 
-Full code of demo described above is [here](https://github.com/matchmore/tech-blog/tree/master/20180321/code)
+Full code of demo described above is [here](https://github.com/matchmore/tech-blog/tree/master/20180321/code).
