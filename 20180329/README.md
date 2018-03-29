@@ -1,5 +1,3 @@
-# First mobile app with Matchmore
-
 In this post, we will go through setting up an iOS application with AlpsSDK, from registration on the portal to obtaining a match.
 
 ## Before you start
@@ -12,7 +10,7 @@ sudo gem install cocoapods
 Now let's create a new application on Matchmore Portal and obtain the API key that we will use to configure SDK later on.
 After logging in ([register for free here](http://matchmore.com/account/register/)) you do the following:
 
-![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/create-app.gif "create app")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180329/img/create-app.gif "create app")
 
 ## Xcode mobile app
 Now let's create a fresh single view project in Xcode (I highly recommend using Swift🤓). After that, close Xcode and go to the main application directory with terminal, in this case my-app. Execute `pod init` which will create `Podfile` file. To add AlpsSDK to application, add `pod 'AlpsSDK', '~> 0.6'` to `Podfile`. 
@@ -59,12 +57,10 @@ There will be a compilation error because Xcode does not know what `MatchMoreCon
 
 Now that the SDK is set up, we will create a label and two buttons in the main application view in `Main.storyboard`.
 
-![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/app-main-page.png "app main view")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180329/img/app-main-page.png "app main view")
 
 ## Create a publication
-Let's write the code that will create a publication and a subscription when clicking on the buttons.
-
-The first step is to create `IBAction` for the publish button:
+Let's write the code that will create a publication and a subscription when clicking on the buttons. The first step is to create `IBAction` for the publish button:
 ```swift
 @IBAction func publish() {
     let properties: [String: Any] = ["test": true]
@@ -143,7 +139,7 @@ The scenario is like this:
 
 Now lets start two simulators and check how it works:
 
-![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180321/img/match.gif "match")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180329/img/match.gif "match")
 
 The match is instant because both simulators are in the same location.
 
@@ -179,7 +175,7 @@ First we created a subscription on one phone and then a publication on the other
 ]]
 ```
 
-## Whats next
+## What's next?
 So to sum up:
 
 AlpsSDK allows us to quickly attach pieces of information to phones, iBeacons and static locations (but this is for another blog post) in the form of publications and query them with subscriptions. Information is delivered to the device that has attached a subscription when it is in the proximity of a matching publication.
@@ -188,12 +184,12 @@ Subscription and publication are matching if they are on the same topic, they ar
 
 One way to simplify this is to treat publication like database records that are attached to physical objects that move around (like a phone). A subscription is like a query that gets results in the form of the match when it is in the proximity of publication. As with a database, you can model many business cases with publications and subscriptions. 
 
-For example, the publication could be on a taxi driver's phone and the subscription on a passenger's phone, so that the passenger can see available drivers within a range of 3000 meters. 
+For example, the publication could be on a taxi driver's phone and the subscription on a passenger's phone, so that the passenger can see available drivers within a range of 3'000 meters. 
 
 Another example could be a publication with promotion information that is attached to a location which expires after 5 hours, and a subscription could be attached to a customer's phone which will get a notification if he or she is near the location before the publication expires.
 
-The last example could be a publication attached to a phone that adjust the heating when you leave and enter the house.
+The last example could be a publication attached to a phone that adjusts the heating when you leave and enter the house.
 
 Possibilities are endless.
 
-Full code of demo described above is [here](https://github.com/matchmore/tech-blog/tree/master/20180321/code).
+Full code of demo described above is [here](https://github.com/matchmore/tech-blog/tree/master/20180329/code).
