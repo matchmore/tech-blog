@@ -17,7 +17,7 @@ If you'd like to follow along, here's what you'll need:
 
 * Xcode 9.2 or newer, so you can follow along with the Swift code.
 * You'll need Cocoapods installed to pull Matchmore into the project.
-* A Matchmore account to start the service. [You can register for free here](http://matchmore.com/account/register/).
+* A Matchmore account to start the service. [You can register for free here](http://matchmore.com/account/register/). 
 * If you want to test the app in real life, you'll need at least two iPhones supporting iOS9. Else, you can test it via Xcode simulator.
 
 # PART 1 Create the UI
@@ -126,7 +126,7 @@ Keep the label selected.
 
 5. With the button selected, open the `Attributes inspector` in the utility area.
 
-6. In the `Attributes inspector`, find the field labeled `Text Color` and change it to White Color.
+6. In the `Attributes inspector`, find the field labeled `Text Color` and change it to White Color. 
 
 7. Stay in the `Attributes inspector`, under View, find the field labeled `Background` and change the color to HEX Color #0096FD.
 
@@ -211,11 +211,11 @@ In *ViewController.swift*, just above the last curly brace ( } ), add the follow
 #### Connect the button to an action
 
 1. In your storyboard, select the `Change Color button`.
-
+ 
 2. Control-drag from the `Change Color button` on your canvas to the code display in the editor on the right, stopping the drag at the line below the comment you just added in *ViewController.swift*.
-
+ 
 3. In the dialog that appears, for `Connection` select `Action`.
-
+ 
 4. For `Name`, type `changeColor`. Click Connect.
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/15.png "button action")
@@ -282,15 +282,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
-
+    
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
-    }
+    } 
     // ...
 }
 ```
@@ -311,36 +311,38 @@ The following lines are BONUS, I have added some supplements setup to have a bet
         rangeSlider.maximumValue = 300
      // ...
      }
-```
+``` 
 
 You are done with the UI (See image below) and we can now move on to implement the color feature based on geomatching.
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/4.png "final UI")
 
-Have a look at the end of this blog post of what your *ViewController.swift* file should contain.
+Have a look at the end of what your *ViewController.swift* file should contain.
 
-Make sure it corresponds, else you can download the [completed part one](https://github.com/matchmore/tech-blog/tree/master/20180403/code/myColorApp):
+Make sure it corresponds, else you can download the [completed part one](https://github.com/matchmore/tech-blog/tree/master/20180403/code/myColorApp)
 
-I hope you enjoyed reading this tutorial and good luck !
+I hope you enjoyed reading this tutorial and wish you good luck !
 
-Things are getting interesting, make sure to not miss the second part.
+Make sure to not miss the second part. We will cover the integration of Matchmore, to make the app able to spread color to near detected devices screen !
 
-*ViewController.swift* file:
 
+
+
+*ViewController.swift* file: 
 ```
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
-
+    
+    
     // MARK: Properties
     @IBOutlet weak var colorPicker: UIPickerView!
     @IBOutlet weak var rangeSlider: UISlider!
     @IBOutlet weak var rangeLabel: UILabel!
     @IBOutlet weak var changeButton: UIButton!
     var pickerData: [String] = [String]()
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Additional setup for UI
@@ -353,11 +355,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         rangeSlider.minimumValue = 1
         rangeSlider.setValue(1.0, animated: true)
         rangeSlider.maximumValue = 300
-
+        
         // Connect data:
         self.colorPicker.delegate = self
         self.colorPicker.dataSource = self
-
+        
         // Input data into the Array:
         pickerData = ["yellow", "red", "orange", "magenta", "lightgray", "green", "cyan", "teal", "pink", "white"]
     }
@@ -372,16 +374,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     @IBAction func rangeSliderChanged(_ sender: Any) {
     }
-
+    
     // MARK: Picker view stubs
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
-
+    
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
