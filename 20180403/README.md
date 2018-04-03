@@ -1,10 +1,9 @@
 # Getting Started with Matchmore: A Proximity detection based location app with Swift iOS [Part 1 of 2]
-
 This tutorial will show you how to write an iOS app that changes the color of the screen of surrounding devices to match the most recent published value. We'll be working with Matchmore iOS SDK which encapsulates the well known CoreLocation framework. The code will be written in Swift 4 for iOS9 and Xcode 9.2.
 
 The purpose of this tutorial is to show you how quick and easy it is to get a proof-of-concept **proximity detection based location app**.
 
-All the code for this demo is also available at GitHub: [alps-ios-app-color](https://github.com/matchmore/alps-ios-app-color)
+All the code for this demo is also available at GitHub: [myColorApp](https://github.com/matchmore/tech-blog/tree/master/20180403/code/myColorApp)
 
 I have divided this tutorial in two blog posts:
 
@@ -27,7 +26,7 @@ In this first part, you'll create the single view needed for this app.
 
 This is relatvely basic stuff, so if you are an advanced developer you might want to jump directly to the second blog post about Matchmore and geomatching.
 
-Here is a [link](http://) to download a ready-to-use UI, the project is explained in the fellowing tutorial.
+Here is a [link](https://github.com/matchmore/tech-blog/tree/master/20180403/code/myColorApp) to download a ready-to-use UI, the project is explained in the fellowing tutorial.
 
 ## Project Setup
 
@@ -57,7 +56,7 @@ Open your storyboard, in the project navigator, select *Main.storyboard*.
 
 3. Type 0 in the top, left and right boxes. Press Return.
 
-![5](/content/images/2018/04/5.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/5.png "picker view")
 
 ### Add a slider to your scene
 
@@ -79,7 +78,7 @@ Stop dragging the slider when it snaps to the guidelines.
 
 3. Type 16 in the left and right boxes, and type 8 spacing in the top box. Press Return.
 
-![6](/content/images/2018/04/6.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/6.png "slider")
 
 ### Add a label to your scene
 
@@ -105,7 +104,7 @@ Stop dragging the label when it snaps to the guidelines.
 
 4. Type 8 in the top box, set constraints Width equals to 90 and Height equals to 30, press return.
 
-![7](/content/images/2018/04/7.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/7.png "label constraint")
 
 Keep the label selected.
 
@@ -113,7 +112,7 @@ Keep the label selected.
 
 6. Tick the `Horizontally in Container`, and press return.
 
-![8](/content/images/2018/04/8.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/8.png "label horizontal constraint")
 
 ### Add a button to your scene
 
@@ -145,7 +144,7 @@ Keep the label selected.
 
 4. Type 8 in the top box, set constraints Width equals to 160 and Height equals to 50, press return.
 
-![9](/content/images/2018/04/9.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/9.png "button constraint")
 
 Keep the button selected.
 
@@ -153,10 +152,10 @@ Keep the button selected.
 
 6. Tick the `Horizontally in Container`, and press return.
 
-![10](/content/images/2018/04/10.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/5.png "button horizontal constraint")
 
 Your UI is ready and should look like image below.
-![3](/content/images/2018/04/3.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/3.png "UI Ready, not connected")
 
 ## Connect the UI to the code
 
@@ -176,7 +175,7 @@ In *ViewController.swift*, find the class line, and add the following:
 
 3. In the dialog that appears, for `Name`, type `colorPicker`. Leave the rest of the options as they are. Click Connect.
 
-![11](/content/images/2018/04/11.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/11.png "picker view connection")
 
 ### Connect the slider
 1. In your storyboard, select the `slider`.
@@ -185,7 +184,7 @@ In *ViewController.swift*, find the class line, and add the following:
 
 3. In the dialog that appears, for `Name`, type `rangeSlider`. Leave the rest of the options as they are. Click Connect.
 
-![12](/content/images/2018/04/12.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/12.png "slider connection")
 
 ### Connect the label
 1. In your storyboard, select the `label`.
@@ -194,7 +193,7 @@ In *ViewController.swift*, find the class line, and add the following:
 
 3. In the dialog that appears, for `Name`, type `rangeLabel`. Leave the rest of the options as they are. Click Connect.
 
-![13](/content/images/2018/04/13.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/13.png "label connection")
 
 ### Connect the button
 1. In your storyboard, select the `button`.
@@ -203,7 +202,7 @@ In *ViewController.swift*, find the class line, and add the following:
 
 3. In the dialog that appears, for `Name`, type `changeButton`. Leave the rest of the options as they are. Click Connect.
 
-![14](/content/images/2018/04/14.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/14.png "button connection")
 
 ### Connect actions to the UI
 In *ViewController.swift*, just above the last curly brace ( } ), add the following:
@@ -219,7 +218,7 @@ In *ViewController.swift*, just above the last curly brace ( } ), add the follow
 
 4. For `Name`, type `changeColor`. Click Connect.
 
-![15](/content/images/2018/04/15.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/15.png "button action")
 
 #### Connect the slider to an action
 
@@ -231,7 +230,7 @@ In *ViewController.swift*, just above the last curly brace ( } ), add the follow
 
 4. For `Name`, type `rangeSliderChanged`. Click Connect.
 
-![16](/content/images/2018/04/16.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/16.png "slider action")
 
 Leave both actions empty for now.
 
@@ -316,11 +315,11 @@ The following lines are BONUS, I have added some supplements setup to have a bet
 
 You are done with the UI (See image below) and we can now move on to implement the color feature based on geomatching.
 
-![4](/content/images/2018/04/4.png)
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180403/img/4.png "final UI")
 
 Have a look at the end of this blog post of what your *ViewController.swift* file should contain.
 
-Make sure it corresponds, else you can download the [completed part one](http://):
+Make sure it corresponds, else you can download the [completed part one](https://github.com/matchmore/tech-blog/tree/master/20180403/code/myColorApp):
 
 I hope you enjoyed reading this tutorial and good luck !
 
