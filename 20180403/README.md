@@ -9,7 +9,7 @@ I have divided this tutorial in two blog posts:
 
 **1. Build the User Interface (UI) needed for this project (this post).**
 
-2. Incorporate Matchmore to create geomatching and put color on the screen of surrounding devices.
+2. Integrate Matchmore to create geomatching and put color on the screen of surrounding devices.
 
 ## Requirements
 
