@@ -9,8 +9,7 @@ All the code for this demo is available on GitHub here: [myColorApp full](https:
 I have divided this tutorial into two parts:
 
 1. Build the User Interface (UI) needed for this project
-**2. Integrate Matchmore to make geomatching and color surroundings devices screen**
-
+2. **Integrate Matchmore to make geomatching and color surroundings devices screen**
 # PART 2 Integrate Matchmore
 We are back for the part two of this tutorial.
 
@@ -24,6 +23,7 @@ First, you need to inject Matchmore in your Xcode project. You'll need CocoaPods
 If you don’t have CocoaPods installed on your machine, check out [Adam's blog post](http://blog.matchmore.io/first-mobile-app-with-matchmore/) for a quick explanation.
 
 Open **Terminal**, locate to your project folder, like image below.
+
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/1.png "LOCATE")
 
 Enter the following command:
@@ -31,6 +31,7 @@ Enter the following command:
 `pod init`, press Enter.
 
 See image below.
+
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/2.png "podfile")
 
 It will create a file named Podfile in the main directory of the project.
@@ -42,11 +43,11 @@ See example below.
 
 ```
 target 'myColorApp' do
-# Comment the next line if you're not using Swift ...
-use_frameworks!
+  # Comment the next line if you're not using Swift ...
+  use_frameworks!
 
-pod 'AlpsSDK', '~> 0.6'
-...
+  pod 'AlpsSDK', '~> 0.6'
+  ...
 ```
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/3.png "podfile complete")
@@ -58,6 +59,7 @@ Save the Podfile, and inside **Terminal** enter the following command:
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/4.png "after pod install")
 
 Open the newly created myColorApp.xcworkspace. See image below.
+
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/5.png "workspace")
 
 ## Geomatching with Matchmore
@@ -65,8 +67,8 @@ Matchmore SDK is implemented as a wrapper, so whenever we need to use Matchmore'
 
 Add the following lines to import `Matchmore SDK` and Apple's framework `CoreLocation` at the top of *AppDelegate.swift* file:
 ```swift
-import AlpsSDK
-import CoreLocation
+    import AlpsSDK
+    import CoreLocation
 ```
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/6.png "import matchmore")
@@ -80,20 +82,20 @@ For our `colors app`, we will initiate Matchmore with particular configurations,
 // ...
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-// 1. Create LocationManager
-let locationManager = CLLocationManager()
-// 2. Set LocationManager configurations
-locationManager.pausesLocationUpdatesAutomatically = true
-locationManager.desiredAccuracy = kCLLocationAccuracyBest
-locationManager.requestWhenInUseAuthorization()
-
-// 3. Create your MatchMoreConfig
-// Generate your API-key in your app dashboard on https://matchmore.io
-let config = MatchMoreConfig(apiKey: "your api-key HERE", customLocationManager: locationManager)
-// 4. Configure Matchmore with your needs
-MatchMore.configure(config)
-
-// ...
+        // 1. Create LocationManager
+        let locationManager = CLLocationManager()
+        // 2. Set LocationManager configurations
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
+        // 3. Create your MatchMoreConfig
+        // Generate your API-key in your app dashboard on https://matchmore.io
+        let config = MatchMoreConfig(apiKey: "your api-key HERE", customLocationManager: locationManager)
+        // 4. Configure Matchmore with your needs
+        MatchMore.configure(config)
+        
+        // ...
 ```
 
 Inside of `func didFinishLaunchingWithOptions()` in your `AppDelegate`.
@@ -128,19 +130,19 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 // ...
 
 // 1. Create the main device
-MatchMore.startUsingMainDevice { result in
-// 2. Unwrap the result
-guard case .success(let mainDevice) = result else { print(result.errorMessage ?? ""); return }
-print("🏔 Using device: 🏔\n\(mainDevice.encodeToJSON())")
-
-// 3. Start getting matches with Web Socket service
-MatchMore.startListeningForNewMatches()
-// 4. Start location track in Matchmore
-MatchMore.startUpdatingLocation()
-// 5. Create the socket subscription
-self.createSocketSubscription()
-}
-// ...
+        MatchMore.startUsingMainDevice { result in
+            // 2. Unwrap the result
+            guard case .success(let mainDevice) = result else { print(result.errorMessage ?? ""); return }
+            print("🏔 Using device: 🏔\n\(mainDevice.encodeToJSON())")
+            
+            // 3. Start getting matches with Web Socket service
+            MatchMore.startListeningForNewMatches()
+            // 4. Start location track in Matchmore
+            MatchMore.startUpdatingLocation()
+            // 5. Create the socket subscription
+            self.createSocketSubscription()
+        }
+        // ...
 ```
 
 Inside of `func didFinishLaunchingWithOptions()` in your `AppDelegate`.
@@ -159,25 +161,25 @@ Now, you will create a subscription to the main device. Subscribers are the ones
 In our case, when matches occur our background should change according to the color chosen by the publishers.
 
 ```swift
-// 1. Create Socket subscription function
-// Subscriptions
-func createSocketSubscription() {
-// 2. Retrieve main device ID
-guard let deviceId = MatchMore.mainDevice?.id else {return}
-// 3. Create a Subscription, set topic and selector.
-let subscription = Subscription(topic: "color", range: 5, duration: 5000, selector: "id <> '\(deviceId)'")
-// 4. Set websocket mode
-subscription.pushers = ["ws"]
-// 5. Create a Subscription for Main Device
-MatchMore.createSubscriptionForMainDevice(subscription: subscription, completion: { result in
-switch result {
-case .success(let sub):
-print("🏔 Socket Sub was created 🏔\n\(sub.encodeToJSON())")
-case .failure(let error):
-print("🌋 \(String(describing: error?.message)) 🌋")
-}
-})
-}
+    // 1. Create Socket subscription function
+    // Subscriptions
+    func createSocketSubscription() {
+        // 2. Retrieve main device ID
+        guard let deviceId = MatchMore.mainDevice?.id else {return}
+        // 3. Create a Subscription, set topic and selector.
+        let subscription = Subscription(topic: "color", range: 5, duration: 5000, selector: "id <> '\(deviceId)'")
+        // 4. Set websocket mode
+        subscription.pushers = ["ws"]
+        // 5. Create a Subscription for Main Device
+        MatchMore.createSubscriptionForMainDevice(subscription: subscription, completion: { result in
+            switch result {
+            case .success(let sub):
+                print("🏔 Socket Sub was created 🏔\n\(sub.encodeToJSON())")
+            case .failure(let error):
+                print("🌋 \(String(describing: error?.message)) 🌋")
+            }
+        })
+    }
 ```
 
 In *AppDelegate.swift*, just above the last curly brace ( } ).
@@ -203,25 +205,25 @@ N.B .: A device can be both publisher and subscriber at the same time.
 Let's create a publication.
 
 ```swift
-// 1. Create publication creation function
-// Create a publication
-func createPublication() {
-// 2. Retrieve selected picker row, selected range, and main device ID
-let selectedValue = pickerData[colorPicker.selectedRow(inComponent: 0)]
-let selectedRange = rangeSlider.value
-guard let deviceId = MatchMore.mainDevice?.id else {return}
-// 3. Create a Publication, set topic and properties
-let publication = Publication(topic: "color", range: Double(Int(selectedRange)), duration: 100, properties: ["color": selectedValue, "id": deviceId])
-// 4. Create a Publication for Main Device
-MatchMore.createPublicationForMainDevice(publication: publication, completion: { result in
-switch result {
-case .success(let publication):
-print("🏔 Pub was created: 🏔\n\(publication.encodeToJSON())")
-case .failure(let error):
-print("🌋 \(String(describing: error?.message)) 🌋")
-}
-})
-}
+    // 1. Create publication creation function
+    // Create a publication
+    func createPublication() {
+        // 2. Retrieve selected picker row, selected range, and main device ID
+        let selectedValue = pickerData[colorPicker.selectedRow(inComponent: 0)]
+        let selectedRange = rangeSlider.value
+        guard let deviceId = MatchMore.mainDevice?.id else {return}
+        // 3. Create a Publication, set topic and properties
+        let publication = Publication(topic: "color", range: Double(Int(selectedRange)), duration: 100, properties: ["color": selectedValue, "id": deviceId])
+        // 4. Create a Publication for Main Device
+        MatchMore.createPublicationForMainDevice(publication: publication, completion: { result in
+            switch result {
+            case .success(let publication):
+                print("🏔 Pub was created: 🏔\n\(publication.encodeToJSON())")
+            case .failure(let error):
+                print("🌋 \(String(describing: error?.message)) 🌋")
+            }
+        })
+    }
 ```
 
 In *ViewController.swift*, just above the last curly brace ( } ).
@@ -267,16 +269,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 // ...
 var onMatch: OnMatchClosure?
 let colors = ["yellow": UIColor.yellow,
-"red": UIColor(red: 255/255, green: 106/255, blue: 93/255, alpha: 1),
-"orange": UIColor(red: 255/255, green: 179/255, blue: 70/255, alpha: 1),
-"magenta": UIColor(red: 255/255, green: 116/255, blue: 217/255, alpha: 1),
-"lightgray": UIColor.lightGray,
-"green": UIColor(red: 134/255, green: 255/255, blue: 150/255, alpha: 1),
-"cyan": UIColor.cyan,
-"teal": UIColor(red: 20/255, green: 229/255, blue: 204/255, alpha: 1),
-"pink": UIColor(red: 255/255, green: 173/255, blue: 171/255, alpha: 1),
-"white": UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-]
+                  "red": UIColor(red: 255/255, green: 106/255, blue: 93/255, alpha: 1),
+                  "orange": UIColor(red: 255/255, green: 179/255, blue: 70/255, alpha: 1),
+                  "magenta": UIColor(red: 255/255, green: 116/255, blue: 217/255, alpha: 1),
+                  "lightgray": UIColor.lightGray,
+                  "green": UIColor(red: 134/255, green: 255/255, blue: 150/255, alpha: 1),
+                  "cyan": UIColor.cyan,
+                  "teal": UIColor(red: 20/255, green: 229/255, blue: 204/255, alpha: 1),
+                  "pink": UIColor(red: 255/255, green: 173/255, blue: 171/255, alpha: 1),
+                  "white": UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+    ]
 // ...
 ```
 
@@ -285,26 +287,26 @@ let colors = ["yellow": UIColor.yellow,
 2. By adding the following lines inside of the method `viewDidLoad()`, you'll make `ViewController` conform to `MatchDelegate` protocol, plus you'll be able to describe how it should process matches:
 
 ```swift
-// Handle Matches
-self.onMatch = { [weak self] matches, _ in
-// 1. Get most recent Match
-let mostRecentDate = matches.max(by: {
-$0.createdAt! < $1.createdAt!
-})
-
-// 2. Unwrap properties and color
-guard let properties = mostRecentDate?.publication?.properties else {
-print("No properties.")
-return
-}
-guard let color = properties["color"] as? String else {return}
-
-// 3. Color Background of the screen
-self?.view.backgroundColor = self?.colors[color]
-}
-// 4. Add View as a supplement match delegate to Matchmore
-MatchMore.matchDelegates += self
-}
+        // Handle Matches
+        self.onMatch = { [weak self] matches, _ in
+            // 1. Get most recent Match
+            let mostRecentDate = matches.max(by: {
+                $0.createdAt! < $1.createdAt!
+            })
+            
+            // 2. Unwrap properties and color
+            guard let properties = mostRecentDate?.publication?.properties else {
+                print("No properties.")
+                return
+            }
+            guard let color = properties["color"] as? String else {return}
+            
+            // 3. Color Background of the screen
+            self?.view.backgroundColor = self?.colors[color]
+        }
+        // 4. Add View as a supplement match delegate to Matchmore
+        MatchMore.matchDelegates += self
+    }
 ```
 
 Inside of `func viewDidLoad()` in your `ViewController.swift` file.
@@ -325,7 +327,7 @@ Before trying the app in the simulator, don't forget to provide a valid API-key 
 Launch two simulators, and try to spread the color across the devices.
 N.B.: Be sure that both simulators are set to locations close enough, so they can match. To set location, go to `Simulator menu/Debug/Location/Custom Location...`.
 
-![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/16.png "Simulations")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180411/img/16.gif "Simulations")
 
 ## What's next?
 In this tutorial, you learned how to use Matchmore and get a quick working proof-of-concept proximity detection app.
