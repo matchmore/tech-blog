@@ -49,20 +49,20 @@ lazy var locationManager: CLLocationManager = {
 ```
 Let's break it down with some documentation before we go any further:
 
-`desiredAccuracy`:
+* `desiredAccuracy`:
 The accuracy of the location data.
 The receiver does its best to achieve the requested accuracy; however, the actual accuracy is not guaranteed.
 You should assign a value to this property that is appropriate for your usage scenario. For example, if you need the current location only within a kilometer, you should specify `kCLLocationAccuracyKilometer` and not `kCLLocationAccuracyBestForNavigation`. Determining a location with greater accuracy requires more time and more power.
 When requesting high-accuracy location data, the initial event delivered by the location service may not have the accuracy you requested. The location service delivers the initial event as quickly as possible. It then continues to determine the location with the accuracy you requested and delivers additional events, as necessary when that data is available.
 
-`activityType`:
+* `activityType`:
 The location manager uses the information in this property as a cue to determine when location updates may be automatically paused. Pausing updates gives the system the opportunity to save power in situations where the user's location is not likely to be changing. For example, if the activity type is `automotiveNavigation` and no location changes have occurred recently, the radios might be powered down until movement is detected again.
 
-`pausesLocationUpdatesAutomatically`:
+* `pausesLocationUpdatesAutomatically`:
 A Boolean value indicating whether the location manager object may pause location updates.
 Allowing the location manager to pause updates can improve battery life on the target device without sacrificing location data. When this property is set to true, the location manager pauses updates (and powers down the appropriate hardware) at times when the location data is unlikely to change. For example, if the user stops for food while using a navigation app, the location manager might pause updates for a period of time. You can help the determination of when to pause location updates by assigning a value to the `activityType` property.
 
-`allowsBackgroundLocationUpdates`:
+* `allowsBackgroundLocationUpdates`:
 A Boolean value indicating whether the app should receive location updates when suspended.
 Apps that want to receive location updates when suspended must include the `UIBackgroundModes` key (with the location value) in their app’s Info.plist file and set the value of this property to true. The presence of the `UIBackgroundModes` key with the location value is required for background updates; you use this property to enable and disable background updates programmatically. For example, you might set this property to true only after the user enables features in your app where background updates are needed.
 
