@@ -2,7 +2,7 @@
 
 You probably had battery frustration. New age sickness. Your phone died already several times, right? In the least expected moments. You started to wonder: who's fault is that? You go to the settings looking for the hog. There it is. An application that was doing something in the background, even worse GPS! You take it's permissions back. Now you're safe - never opening the app back again.
 
-But when you are a developer - you don't want above to happen to the app you're working on, but still, you want to give these features, because they're cool and that's reasonable.
+But when you are a developer - you don't want above to happen to the app you're working on, but still, you want to give all these location/background related features, because they're cool and that's reasonable.
 
 What can we do about it?
 
@@ -25,7 +25,7 @@ The truth is that the best we can do is to really start using your own app as if
 
 The general scenario was pretty simple. Create some offers with tickets you are interested in on your way to work and back home and see if you were able to be notified about them all while using your phone normally as you would.
 
-Beginnings were awful. The first implementation we've given to testers with the default setup of the SDK was updating location every second almost every time talking to our cloud. You can imagine how it went. It was a slaughter. iPhones were dying within hours. Tough to be completely honest with you, we expected that to happen. Having that test we learned how much we can squeeze in in terms of data quality, not caring about battery cost at all. After that our motivation was to figure out the best setup with which we could obtain proper balance. Minimize battery usage and maximize the usefulness of the features. To do so we needed to answer several questions.
+Beginnings were awful. The first implementation we've given to testers with the default setup of the SDK was updating location every second almost every time talking to our cloud. You can imagine how it went. It was a slaughter. iPhones were dying within hours. Tough to be completely honest with you, we expected that to happen. Having that test we learned how much we can squeeze in in terms of data quality, not caring about battery cost at all. After that our motivation was to figure out the best setup with which we could obtain proper balance. Minimizing battery usage while maximizing the usefulness of the features. To do so we needed to answer several questions.
 
 ## How to analyze your project needs?
 
@@ -102,4 +102,4 @@ https://github.com/matchmore/ios-ticketing-app
 We're also releasing it to the AppStore.
 
 ## To sum it up
-There're quite some tools out there to make your app efficient. It may require some digging, but it definitely worth it. For all these years Apple made real effort to provide well-designed mechanisms that are both safe for the user and powerful enough for the developer.
+There're quite some tools out there to make your app efficient. It may require some digging, but it's definitely worth it. For all these years Apple made real effort to provide well-designed mechanisms that are both safe for the user and powerful for the developer.
