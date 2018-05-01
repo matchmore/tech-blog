@@ -1,0 +1,70 @@
+:PROPERTIES:
+#+TITLE: Why Matchmore?
+#+AUTHOR: Rafał Kowalski
+#+EMAIL: rafal.kowalski@matchmore.com
+#+DATE:
+#+DESCRIPTION:
+#+KEYWORDS:  Matchmore geomatching simple location-based proximity scalable
+#+LANGUAGE:  en
+#+STARTUP: overview
+#+STARTUP: logdone
+#+PROPERTY: Effort_ALL  0:10 0:20 0:30 1:00 2:00 4:00 6:00 8:00
+#+COLUMNS: %38ITEM(Details) %TAGS(Context) %7TODO(To Do) %5Effort(Time){:} %6CLOCKSUM{Total}
+#+PROPERTY: Effort_ALL 0 0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00
+#+TAGS: HOME(H) SHOPPING(S) CAR(C)
+#+TAGS: PROJECT(j) EMAIL(e) PHONE(p) COMPUTER(c) CODE(d) ONLINE(o)
+#+TAGS: STUDY(s) READ(r) WATCH(w) LISTEN(l)
+#+SEQ_TODO: TODO(t) STARTED(s) WAITING(w) APPT(a) FEEDBACK(b) | DONE(d) CANCELLED(c) DEFERRED(f)
+#+OPTIONS:   num:t toc:4 \n:nil @:t ::t |:t ^:t -:t f:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:(not LOGBOOK) todo:t pri:nil tags:t
+#+OPTIONS:   H:5
+#+INFOJS_OPT: view:nil toc:t ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="./stylesheet/scalps.css" type="text/css"/>
+#+XSLT:
+#+STARTUP: beamer
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_HEADER: \usepackage{minted}
+#+LaTeX_HEADER: \usemintedstyle{scala}
+# #+LaTeX_HEADER: \newminted{scala}{fontsize=\footnotesize}
+#+BEAMER_THEME: default
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: solarized
+#+REVEAL_HLEVEL: 4
+#+REVEAL_HEAD_PREAMBLE: <meta name="description" content="SCALPS notes.">
+#+REVEAL_POSTAMBLE: <p> Created by Rafal. </p>
+#+REVEAL_PLUGINS: (highlight markdown notes)
+:END:
+
+* Why Matchmore?
+
+** Simplify the Development
+
+** Model Once and Deploy on Many Platforms
+
+** Serverless (not sleepless) Computing
+
+*** Scale According to the Demand
+
+** "But... we can do it ourselves!"
+
+# Of course you could but why would you?
+
+* COMMENT Complexity of Context-aware Applications
+
+* COMMENT Model Dynamic Behavior
+
+** COMMENT Decompose in Devices, Publications and Subscriptions
