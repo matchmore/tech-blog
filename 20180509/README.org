@@ -266,8 +266,8 @@ with cool /simulation and debugging tools/, with which the developer
 can create a herd of devices together with their publication and
 subscriptions and simulate their movements and therefore the
 interaction between them possibly triggering matches.  This should
-help designing and model the application based on geomatching but also
-help debugging the device interaction and missing matches.
+help to design and model the application based on geomatching but also
+help to debug the device interaction and missing matches.
 
 In our lab, we are also looking at the integration with AR toolkits,
 e.g. the Apple ARKit, to allow for easy placement of virtual objects
@@ -284,13 +284,13 @@ all kinds of context-aware[fn:6] mobile applications, we will be
 implementing cloud functions aka lambdas similar to AWS Lambda[fn:8]
 and Google Cloud Functions[fn:9] to allow developers to trigger data
 processing without the need to have any servers or API endpoints on
-their own, wich would allow for a completely serverless implementation
+their own, which would allow for a completely serverless implementation
 of their applications.
 
 Please follow this blog and the development of the Matchmore cloud
 service as we are rolling out new features and platform components.
 As we add more value to the Matchmore platform and make it more
-accessible to all developers, we hope to convince the devlopers that
+accessible to all developers, we hope to convince the developers that
 building their own backends for location- and proximity-based features
 doesn't make much sense in 2018 with all the code and servers to be
 maintained, scalability and availability challenges, when serverless
