@@ -1,5 +1,5 @@
 :PROPERTIES:
-#+TITLE: Why Matchmore?
+#+TITLE: Why We Are Building Matchmore?
 #+AUTHOR: Rafał Kowalski
 #+EMAIL: rafal.kowalski@matchmore.com
 #+DATE:
@@ -49,22 +49,228 @@
 #+REVEAL_PLUGINS: (highlight markdown notes)
 :END:
 
-* Why Matchmore?
+* Why we are building Matchmore?
+
+#+BEGIN_COMMENT
+  - Why we are building Matchmore?
+  - What are the benefits for the developer using MM?
+    - Simplify development
+    - Concentrate on the business logic
+    - Eventually have a serverless context-aware (location- and
+      proximity-based) application with all the advantages of
+      serverless (see below)
+    - Have control over cost
+#+END_COMMENT
+
+In a [[https://blog.matchmore.io/what-is-geomatching/][previous blog post]], Matchmore's co-founder and professor at the
+University of Lausanne, Benoît Garbinato, explained the concept of
+/geomatching/ and its advantages over the more limited /geofencing/
+for context-aware mobile applications.  In this blog post, I'd like to
+share with you my thoughts on why we are building Matchmore cloud
+service and where we are going with it.  Some of the features and
+Matchmore components I will be mentioning haven't been released yet
+but I'd like to give you a sneak peak of what's coming this year.
+When they have been released, we think that Matchmore will become an
+obvious choice for any mobile application developer adding
+context-aware features to his/her application.
+
+Until now, when developing the location- and proximity-based features
+for your application, you've been using geofencing on the device and
+cloud services like Google Maps.  In addition, in many cases you've
+been building your own backend service to provide the storage for your
+geofence definition and for running the business logic when the
+presence in such a geofence has been detected.
+
+We think there is a better, serverless way by using Matchmore cloud
+service.
 
 ** Simplify the Development
 
-** Model Once and Deploy on Many Platforms
-
-** Serverless (not sleepless) Computing
-
-*** Scale According to the Demand
+Adopting geomatching, our location- and proximity-based
+publication/subscription paradigm allows a radical simplification of
+the modeling and development of the mobile application's context-aware
+part.  Instead of defining, storing and managing geofences, the
+developer decomposes the application in terms of devices, publications
+and subscriptions[fn:1].  The Matchmore cloud service is then
+responsible for generating matches.  The application development is
+therefore streamlined to handling just the match events saving the
+developer from handling location and proximity APIs directly on every
+supported platform.  This is an obvious additional advantage to model
+an application in such way as it can be reused on all supported
+platforms without change avoiding the adoption of the
+platform-specific frameworks and APIs altogether.  Currently, we
+support iOS, Android, JavaScript and Unity3D platforms and this list
+is growing constantly[fn:2].
 
 ** "But... we can do it ourselves!"
 
-# Of course you could but why would you?
+   *Of course you could but why would you?*
 
-* COMMENT Complexity of Context-aware Applications
+   - Provide an example of backends which in the past were provided by
+     developers (DBs, etc.) but today offered as SaaS offerings of
+     Amazon, Google, Microsoft etc.
+   - You can concentrate on the business logic and easily run
+     experiments with variants of your use case
+   - Safe time and effort for the core of your application
+   - Advantages of serverless (don't worry about the):
+     - no server mangement
+     - flexible scaling
+     - high availabilty
 
-* COMMENT Model Dynamic Behavior
+Matchmore cloud service is about bringing the advantages of
+/geomatching/ to mobile application developers, designing and building
+context-aware applications[fn:7], in an easy to use and economic
+manner.  We believe that by using Matchmore cloud service and by
+embracing the geomatching, a mobile application developer will be able
+to spend more of his/her valuable time on building an awesome
+application and concentrate on its core business idea instead of
+building a one-off back-end system to support its context-aware
 
-** COMMENT Decompose in Devices, Publications and Subscriptions
+** Serverless Context-Aware Computing
+
+#+BEGIN_COMMENT
+   - We aim at providing a complete serverless computing platform for
+     context-aware, geomatching applications
+   - Backend as a Service (BaaS)
+   - Function as a Service (FaaS)
+   - AWS Lambda Architecture
+   - Advantages of serverless
+
+   https://www.martinfowler.com/articles/serverless.html
+   https://en.wikipedia.org/wiki/Serverless_computing
+   https://aws.amazon.com/serverless/
+#+END_COMMENT
+
+#+BEGIN_COMMENT
+https://aws.amazon.com/serverless/
+
+What is serverless computing?
+
+Serverless computing allows you to build and run applications and
+services without thinking about servers. Serverless applications don't
+require you to provision, scale, and manage any servers. You can build
+them for nearly any type of application or backend service, and
+everything required to run and scale your application with high
+availability is handled for you.
+
+Why use serverless computing?
+
+Building serverless applications means that your developers can focus
+on their core product instead of worrying about managing and operating
+servers or runtimes, either in the cloud or on-premises. This reduced
+overhead lets developers reclaim time and energy that can be spent on
+developing great products which scale and that are reliable.
+
+What are the benefits of serverless computing?
+
+Serverless applications have three main benefits.
+
+No server management
+Flexible scaling
+Automated high availabilty
+
+NO SERVER MANAGEMENT
+
+There is no need to provision or maintain any servers. There is no
+software or runtime to install, maintain, or administer.
+
+FLEXIBLE SCALING
+
+Your application can be scaled automatically or by adjusting its
+capacity through toggling the units of consumption (e.g. throughput,
+memory) rather than units of individual servers.
+
+AUTOMATED HIGH AVAILABILITY
+
+Serverless applications have built-in availability and fault
+tolerance. You don't need to architect for these capabilities since
+the services running the application provide them by default.
+#+END_COMMENT
+
+There has been much interest recently in [[https://www.martinfowler.com/articles/serverless.html][serverless
+computing]] [fn:3]and major players in the space of PaaS and IaaS like
+Amazon[fn:4], Google[fn:5] and Microsoft are building out their
+offering.  The serverless computing according to the Amazon AWS web
+page[fn:4] is a new way to develop and run applications:
+
+#+BEGIN_QUOTE
+"Serverless computing allows you to build and run applications and
+services without thinking about servers. Serverless applications don't
+require you to provision, scale, and manage any servers. You can build
+them for nearly any type of application or backend service, and
+everything required to run and scale your application with high
+availability is handled for you."
+#+END_QUOTE
+
+According to the same Amazon AWS web page, using a serverless approach
+has many advantages.
+
+#+BEGIN_QUOTE
+"Building serverless applications means that your developers can focus
+on their core product instead of worrying about managing and operating
+servers or runtimes, either in the cloud or on-premises. This reduced
+overhead lets developers reclaim time and energy that can be spent on
+developing great products which scale and that are reliable."
+
+Serverless applications have three main benefits.
+
+1) No server management
+2) Flexible scaling
+3) Automated high availabilty
+#+END_QUOTE
+
+Matchmore cloud services will provide a saerverless computing platform
+for context-aware[fn:6] applications by adopting the geomatching
+paradigm and implementing cloud functions aka lambdas similar to AWS
+Lambda[fn:8] and Google Cloud Functions[fn:9]
+
+
+** Simulation and Debugging Tools
+
+   - Phomo
+
+** Integration with AR toolkits
+
+** Data Analytics
+
+** Lambda architecture inspired by AWS Lambda & Google Functions
+
+   - AWS Lambda[fn:8]
+   - Google cloud functions[fn:9]
+
+** Answering developer feedback and questions
+   - "But... we could do it ourselves!"
+     - "Why would you?"
+   - "What should I do with a match?"
+
+** Conclusion
+
+   - Follow us and the development of the Matchmore cloud service as
+     we are rolling out new features and platform components.
+   - Our IoT vision... but that would be a great topic for another
+     blog post in the future
+   - "What was I thinkig when I wanted to build my own backend for
+     location-based services"  Why would I ever want to do it myself
+     when I can use the Matchmore serverless platform
+* Footnotes
+
+[fn:1] A future blog post will show in detail how to do that based on
+  examples of successful mobile applications.
+
+[fn:2] Soon, we'll support Xamarin with more hybrid mobile frameworks
+  following soon.
+
+[fn:3] https://en.wikipedia.org/wiki/Serverless_computing
+
+[fn:4] https://aws.amazon.com/serverless/
+
+[fn:5] https://cloud.google.com/serverless/
+
+[fn:6] location- and proximit-based for now
+
+[fn:7] location- and proximity-based applictions for now but in
+  general all kind of IoT applications in the future
+
+[fn:8] https://aws.amazon.com/lambda/
+
+[fn:9] https://cloud.google.com/functions/docs/
