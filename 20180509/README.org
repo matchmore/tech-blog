@@ -49,10 +49,10 @@
 #+REVEAL_PLUGINS: (highlight markdown notes)
 :END:
 
-* Why we are building Matchmore?
+* Why we are building Matchmore
 
 #+BEGIN_COMMENT
-  - Why we are building Matchmore?
+  - Why we are building Matchmore
   - What are the benefits for the developer using MM?
     - Simplify development
     - Concentrate on the business logic
@@ -100,7 +100,7 @@ application development is therefore streamlined to handling just the
 match events and saving the developer from directly handling the
 location updates and proximity events via their respective APIs, in a
 different way on every supported application platform.  Embracing the
-*geomatching* paradigm and the Matchmore cloud service has an obvious
+geomatching paradigm and the Matchmore cloud service has an obvious
 advantage that the context-aware part of the application has to be
 modelled once on and works in the same way on all supported platforms
 without the need to use platform-specific frameworks and APIs
@@ -130,11 +130,12 @@ We sometimes hear comments from some developers we have been talking
 to that "they can build the backend themselves" and we obviously can't
 deny it.  Who could stop a team of bright, skillful engineers from
 implementing sophisticated backends for their applications.  But the
-real question might be: "why would they do that?"  This is how we see
-it and we call it "*serverless context-aware
-computing*/*geomatching*".
+real question might be: "why would they do that?"  The answer to that
+is our Matchmore cloud service and this is how we see the future: we
+call it "*serverless geomatching*".
 
-** Serverless Context-Aware Computing
+** Serverless Geomatching
+# Serverless Geomatching Context-Aware Computing
 
 #+BEGIN_COMMENT
    - We aim at providing a complete serverless computing platform for
