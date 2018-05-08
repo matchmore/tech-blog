@@ -201,11 +201,14 @@ tolerance. You don't need to architect for these capabilities since
 the services running the application provide them by default.
 #+END_COMMENT
 
-There has been much interest recently in [[https://www.martinfowler.com/articles/serverless.html][serverless
-computing]] [fn:3]and major players in the space of PaaS and IaaS like
-Amazon[fn:4], Google[fn:5] and Microsoft are building out their
-offering.  The serverless computing according to the Amazon AWS web
-page[fn:4] is a new way to develop and run applications:
+There has been much interest recently in [[https://www.martinfowler.com/articles/serverless.html][serverless computing]][fn:3]
+and major players in the space of PaaS like Amazon[fn:4], Google[fn:5]
+and Microsoft are building out their offering.
+
+*** What is Serverless?
+
+The serverless computing according to the Amazon AWS web page[fn:4] is
+a new way to develop and run applications:
 
 #+BEGIN_QUOTE
 "Serverless computing allows you to build and run applications and
@@ -233,14 +236,39 @@ Serverless applications have three main benefits.
 3) Automated high availabilty
 #+END_QUOTE
 
-Matchmore cloud service is about bringing the advantages of
-/geomatching/ to mobile application developers, designing and building
-context-aware applications[fn:7], in an easy to use and economic
-manner.  We believe that by using Matchmore cloud service and by
-embracing the *serverless geomatching*, mobile application developers
-will be able to spend more of their valuable time on building an
-awesome application and concentrate on its core business idea instead
-of building a one-off back-end system to support its context-aware.
+# Serverless applications often make extensive use of third party
+# services to accomplish tasks that are traditionally taken care of by
+# servers.
+
+# In serverless applications, custom code componentes have a lifecycle
+# that is much shorter... This style of organizing software is
+# sometimes called "Function as a Server" -- FaaS
+
+"Serverless" can really mean two different areas but somehow
+overlapping areas[fn:10] (thanks to ThougthWorks for their excellent
+definition):
+
+1) Application architectures that significantly depend on third party
+   cloud services, such as Amazon AWS sometimes called "Backend as a
+   Services" - BaaS, to manage their state and business logic.
+2) Application architectures in which their server-side logic is
+   implemented as event-triggered, developer provided functions and
+   run in third party managed, ephemeral, stateless compute
+   containers. The cloud services allowing for such architectures are
+   often therefore called "Function as a Service" - FaaS.  The
+   prominent examples of such services are Amazon AWS Lambda[fn:8] and
+   Google Cloud Functions[fn:9].
+
+Matchmore cloud service is about both of those areas by providing the
+advantages of /geomatching/ as a BaaS to mobile application developers
+in need of context-aware features[fn:7].  In the future, we will
+extend our service to fully provide the FaaS functionality as well.
+
+We believe that by using Matchmore cloud service and by embracing the
+*serverless geomatching*, mobile application developers will be able
+to spend more of their valuable time on building an awesome
+application and concentrate on its core business idea instead of
+building a one-off back-end system to support its context-aware.
 
 ** Where we are headed
 
@@ -262,23 +290,29 @@ interaction between them possibly triggering matches.  This should
 help to design and model the application based on geomatching but also
 help to debug the device interaction and missing matches.
 
-In our lab, we are also looking at the integration with AR toolkits,
-e.g. the Apple ARKit, to allow for easy placement of virtual objects
-in the AR scenes triggered by proximity to physical objects.  This
-combination of AR and Matchmore could be for example used for tourism
-guide applications and cool games.
+The addition of FaaS capabilities to the Matchmore cloud service will
+enable it to become the first choice for implementing
+context-aware[fn:6] features for mobile applications.  In the future,
+developers will be able to handle a match and process other data
+without the need to have any backend services or API endpoints of
+their own, resulting in a truely serverless architecture.
 
 The developers may also be interested in the anonymous data generated
-by their applications and so we are developing tools for data
-analytics and integration with big data and ML backends.
+by their applications and so we are developing tools for /data
+analytics/ and will provide integration with big data and ML backends
+in the future.  Our goal is to make simple operations like basic
+reporting, aggregation and visualization of data, e.g. as heat maps,
+to be extremely easy to implement.
 
-In order for Matchmore to be the cloud service of choice for building
-all kinds of context-aware[fn:6] mobile applications, we will be
-implementing cloud functions aka lambdas similar to AWS Lambda[fn:8]
-and Google Cloud Functions[fn:9] to allow developers to trigger data
-processing without the need to have any servers or API endpoints on
-their own, which would allow for a completely serverless implementation
-of their applications.
+In our labs, we are also working on the /integration with AR
+toolkits/, e.g. the Apple ARKit[fn:11], to allow for easy placement of
+virtual objects in the AR scenes.  Appearance of such objects would be
+triggered by physical proximity to real objects or landscape features.
+Combination of AR and Matchmore could for example be used for tourism
+guide applications, mobile advertising or cool outdoor games.  Check
+out our Unity3D SDK and example games *provide links to Steamlink
+here!* which demonstrate the potential of our technology in gaming
+industry and stay tuned for the coming AR features.
 
 ** Conclusion
 
@@ -312,6 +346,10 @@ ready for the *serverless geomatching* revolution.
 
 * Footnotes
 
+[fn:11] http://developer.apple.com/arkit
+
+[fn:10] https://www.martinfowler.com/articles/serverless.html
+
 [fn:1] A future blog post will show in detail how to do that based on
   examples of successful mobile applications.
 
@@ -324,7 +362,7 @@ ready for the *serverless geomatching* revolution.
 
 [fn:5] https://cloud.google.com/serverless/
 
-[fn:6] location- and proximit-based for now
+[fn:6] location- and proximity-based applications only for now
 
 [fn:7] location- and proximity-based applictions for now but in
   general all kind of IoT applications in the future
