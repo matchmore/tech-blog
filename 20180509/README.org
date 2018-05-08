@@ -54,11 +54,10 @@
 #+BEGIN_COMMENT
   - Why we are building Matchmore
   - What are the benefits for the developer using MM?
-    - Simplify development
-    - Concentrate on the business logic
-    - Eventually have a serverless context-aware (location- and
-      proximity-based) application with all the advantages of
-      serverless (see below)
+    - Simplify the development
+      - Concentrate on the business logic
+    - A context-aware (location- and proximity-based) application with
+      all the advantages of serverless (see below)
     - Have control over cost
 #+END_COMMENT
 
@@ -135,7 +134,13 @@ is our Matchmore cloud service and this is how we see the future: we
 call it "*serverless geomatching*".
 
 ** Serverless Geomatching
-# Serverless Geomatching Context-Aware Computing
+# Serverless Context-Aware Computing aka Geomatching
+
+#+BEGIN_COMMENT
+   - "But... we could do it ourselves!"
+     - "Why would you?"
+   - "What should I do with a match?"
+#+END_COMMENT
 
 #+BEGIN_COMMENT
    - We aim at providing a complete serverless computing platform for
@@ -237,28 +242,16 @@ will be able to spend more of their valuable time on building an
 awesome application and concentrate on its core business idea instead
 of building a one-off back-end system to support its context-aware.
 
-#+BEGIN_COMMENT
-   - "But... we could do it ourselves!"
-     - "Why would you?"
-   - "What should I do with a match?"
-#+END_COMMENT
-
-** Conclusion
+** Where we are headed
 
 #+BEGIN_COMMENT
-   - Follow us and the development of the Matchmore cloud service as
-     we are rolling out new features and platform components.
-   - Our IoT vision... but that would be a great topic for another
-     blog post in the future
-   - "What was I thinkig when I wanted to build my own backend for
-     location-based services"  Why would I ever want to do it myself
-     when I can use the Matchmore serverless platform
-#+END_COMMENT
+   Roadmap
 
-#+BEGIN_COMMENT
- - "What was I thinkig when I wanted to build my own backend for
-     location-based services"  Why would I ever want to do it myself
-     when I can use the Matchmore serverless platform
+   - Simulation and debugging tools
+   - AR toolkits integration
+   - Analytics
+   - Serverless
+   - Lambdas
 #+END_COMMENT
 
 We have many great additions to the platform in our pipeline, starting
@@ -286,6 +279,24 @@ and Google Cloud Functions[fn:9] to allow developers to trigger data
 processing without the need to have any servers or API endpoints on
 their own, which would allow for a completely serverless implementation
 of their applications.
+
+** Conclusion
+
+#+BEGIN_COMMENT
+   - Follow us and the development of the Matchmore cloud service as
+     we are rolling out new features and platform components.
+   - Our IoT vision... but that would be a great topic for another
+     blog post in the future
+   - "What was I thinkig when I wanted to build my own backend for
+     location-based services"  Why would I ever want to do it myself
+     when I can use the Matchmore serverless platform
+#+END_COMMENT
+
+#+BEGIN_COMMENT
+ - "What was I thinkig when I wanted to build my own backend for
+     location-based services"  Why would I ever want to do it myself
+     when I can use the Matchmore serverless platform
+#+END_COMMENT
 
 Please follow this blog and the development of the Matchmore cloud
 service as we are rolling out new features and platform components.
