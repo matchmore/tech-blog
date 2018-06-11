@@ -12,11 +12,11 @@ In the end user's perspective, there is nothing really compelling to discuss abo
 The little difference, that appears between both standards, does not create a big significance.
 The distinction that does exist between them is rather on their functionalities.
 
-As noted, both protocols work with iOS and Android devices. There is no issue of incompatibility involved with beacon transmissions to 95+% of all the smart devices in the world.
+As noted, both protocols work with iOS and Android devices. There is no issue of incompatibility involved with beacon transmissions to Android and iOS smart devices.
 
 So, from the perspective of end users, developers don't need to be worried about the difference in Eddystone and iBeacon.
 
-Matchmore supports all beacons conform to Android & Eddystone and Apple's standard, iBeacon.
+Matchmore supports all beacons conform to Eddystone and Apple's standard, iBeacon.
 
 # How does it work ? 
 ## Advertising packet
@@ -32,11 +32,11 @@ Note that a beacon only transmits the advertising packet, no descriptive informa
 The beacon's detection in Android devices is different from iOS devices. Mobile applications have different states, when the app is running in foreground both iOS and Android's detection are smooth and nice. While running app in background mode stays smooth for iOS developers, this is not the case for Android developers.
 
 ### Android Issues
-On Android, you don’t have the same low level of integration offered by iOS ; if you want to implement a complex feature involving beacons, you have to dig harder with the Bluetooth APIs, or use another library. Fortunately, there are some very good, mature libraries to handle scanning and ranging on Android.
+On Android, you don’t have the same low level of integration offered by iOS ; if you want to implement a complex feature involving beacons, you have to dig harder with the Bluetooth APIs, or use another library. Fortunately, there are some very good, mature libraries to handle monitoring and ranging on Android.
 
-This difference is very much felt at the introduction of the new version of Android 8.0 (Oreo). With Oreo, you are not allowed to run long background tasks anymore. It creates an important Android limitation to be aware of when running beacons. In the interests of battery consumption, Google have restricted the application's features running in background mode — which effectively means your beacon scanner may not run as frequently as you’d like. Even the best currently available implementations are not guaranteed to be constantly scanning.
+This difference is very much felt at the introduction of the new version of Android 8.0 (Oreo). With Oreo, you are not allowed to run long background tasks anymore. It creates an important Android limitation to be aware of when running beacons. In the interests of battery consumption, Google have restricted the application's features running in background mode — which effectively means your beacon scanner may not run as frequently as you’d like.
 
-If you are developing with beacons on Android, keep in mind that foreground scanning is reliable and you will get 100% of the beacons detection. On the other hand, background scanning can be used but you may miss some beacons some time to time.
+If you are developing with beacons on Android, keep in mind that foreground monitoring is reliable and you will get 100% of the beacons detection. On the other hand, background monitoring can be used but you may miss some beacons some time to time.
 
 ### Smartphones and beacons
 Smartphones interact with beacons in two different ways.
@@ -52,6 +52,7 @@ Every seconds the smartphone refreshes the list of detected beacons. All informa
 3 meters ≤ d < 50 meters.
 • Unknown - the detecting device cannot determine the RSSI, we define the distance between detecting device and beacon to be between:
 50 meters ≤ d < 200 meters.
+
 Figure 1 describes two different cases of beacon ranging.
 ![Figure 1, ranging beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/beaconRanging.pdf "beacons ranging")
 #### Monitoring
@@ -66,6 +67,7 @@ In example, imagine two beacons having equal UUID but different major and
 minor attributes. If an application monitors a beacon region by using only this UUID. The region boundaries are defined by the two beacons advertising packet. In other words, the application will generate appropriate events for the defined region no matter which one of the two beacon’s advertising packet it detects. Important to know that the application can not differentiate which one of the two beacon was detected.
 On the other hand, if you monitor a beacon region by using all values of an iBeacon; The triples (UUID, major and minor). The region boundaries are defined by your uniquely beacon which is broadcasting those triples attributes. Note, nothing stops developers from setting two or more beacons with the exact same triples attributes.
 Apple limits applications to 20 monitored regions, but we can easily pass this limit by using a single UUID to monitor a subset for multiple beacons. An application monitoring a region with only the UUID, no major, no minor provided, cannot access other attributes from advertising packet. The application knows only that it detected a beacon broadcasting the UUID defined for this region. If one wants to know more informations about beacons, one has to use ranging. Monitoring is only used for enter/exit events.
+
 Figure 2, illustrates the beacons monitor.
 ![Figure 2, monitoring beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/beaconMonitoring.pdf "beacons monitoring")
 # And with Matchmore ?
