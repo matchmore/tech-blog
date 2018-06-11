@@ -54,7 +54,7 @@ Every seconds the smartphone refreshes the list of detected beacons. All informa
 50 meters ≤ d < 200 meters.
 
 Figure 1 describes two different cases of beacon ranging.
-![Figure 1, ranging beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/beaconRanging.pdf "beacons ranging")
+![Figure 1, ranging beacons](https://github.com/matchmore/tech-blog/blob/master/20180613/img/beaconRanging.pdf "beacons ranging")
 #### Monitoring
 When one is particularly interested in knowing if users enter or leave a specific area, this is called geofencing. Monitoring beacons is very similar to geofencing. The device is constantly monitoring, therefore even if the application is killed, or application is not in foreground or background mode, monitoring never stops.
 Whenever the device enter or exit a defined region, the application is launched or reactivated and generates appropriate events in relation to the crossed region. In beacons case, a region boundaries is defined by the detection of Bluetooth beacons advertising packet. When one wants to monitor with beacons, one has to define which beacons are included in a region.
@@ -69,7 +69,7 @@ On the other hand, if you monitor a beacon region by using all values of an iBea
 Apple limits applications to 20 monitored regions, but we can easily pass this limit by using a single UUID to monitor a subset for multiple beacons. An application monitoring a region with only the UUID, no major, no minor provided, cannot access other attributes from advertising packet. The application knows only that it detected a beacon broadcasting the UUID defined for this region. If one wants to know more informations about beacons, one has to use ranging. Monitoring is only used for enter/exit events.
 
 Figure 2, illustrates the beacons monitor.
-![Figure 2, monitoring beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/beaconMonitoring.pdf "beacons monitoring")
+![Figure 2, monitoring beacons](https://github.com/matchmore/tech-blog/blob/master/20180613/img/beaconMonitoring.pdf "beacons monitoring")
 # And with Matchmore ?
 There is two advantages to use beacons with Matchmore.
 
@@ -83,15 +83,15 @@ Go to your [account dashboard](www.matchmore.com) by connecting on Matchmore's p
 
 When you are logged in, click on "Beacons" in the user menu.
 
-![Go to beacons view](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/3.png "beacons")
+![Go to beacons view](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/4.png "beacons")
 
 Register all the beacons you plan to use.
 
-![Register your beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/4.png "registration")
+![Register your beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/5.png "registration")
 
 Then, you can start assign your beacons in your app.
 
-![Assign your beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/5.png "assignation")
+![Assign your beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180613/img/3.png "assignation")
 
 Your beacons are ready to be used with Matchmore, you can now use the generated ID to publish or subscribe on your beacons.
 
