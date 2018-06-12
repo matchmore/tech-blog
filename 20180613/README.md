@@ -206,7 +206,7 @@ http://api.matchmore.io/v5/devices \
 
 ### You have the publication on the beacon and now what ?
 
-So, for a subscriber on topic `museum-beacon` to pass near by the beacon (below 3 meters relative distance), will receive a match. This match can trigger pre-implemented feature ; *for example, display a page with The Starry Night painting information*.
+So, for a subscriber on topic `museum-beacon` to pass near by the beacon (below 3 meters relative distance), will receive a match. This match can trigger pre-implemented feature and this match provide useful information based on the properties you have set before. When you know which beacons the end user has been near you can notify him with relevant contents ; *for example, display a page with The Starry Night painting information, because the end user is near the "Beetroot" beacon*.
 
 That would be a good exercise for you:
 - Set a subscription on topic `museum-beacon` on a mobile device
