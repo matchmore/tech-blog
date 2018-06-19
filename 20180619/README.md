@@ -1,9 +1,9 @@
 # Quick and easy way to start with Matchmore: React-native
 
-We already showed you how to do it in Swift iOS, now it is time for the new kid on the block: _React-Native_.
+We already showed you how to do it in iOS using Swift, now it is time for the new kid on the block: _React-Native_.
 After this you will have a good understanding how to make your own Dating App with Matchmore!
 
-Before starting, it will be beneficial to have some React Native know-how before. And we will use Yarn!
+Before starting, it will be beneficial to have some React Native know-how. And we will use Yarn!
 
 Lets start of with creating a React-Native app
 
@@ -34,9 +34,7 @@ After logging in ([register for free here](http://matchmore.com/account/register
 
 ## Setup persistence
 
-You need to wire in the persistence, of your choice.
-
-It is small, for example for React-Native it would look like this
+You need to wire in the persistence, you can use something which works with your existing applications, or browsers `localStorage`. Here we will use AsyncStorage from React-Native.
 
 ```javascript
 const { AsyncStorage } = require("react-native");
@@ -116,7 +114,7 @@ let datingSubscription = await this.manager.createSubscription(
       "Dating App", //topic specific to your applications, you can have multiple topic per app, it is up to you how will you model it, we will provide some insights about this soon
       10000, //range of subscriptions in meters, lets start of with 10km
       86400, //duration of how long the subscription will last, in seconds, lets put in 24 hours
-      "age >= 18" // matching selector
+      "age >= 25" // matching selector
     );
 ```
 
@@ -137,7 +135,7 @@ As we mentioned before, publication properties are the data we want to be search
 
 Ok, lets be real - we are just starting, nobody is our there, we need to create some "people" to test our and develop against.
 
-We can create virtual pins, which here we will mimic other people looking for their second half.
+We can create virtual pins, which here will mimic other people looking for their second half.
 
 ```javascript
 async makePerson(name, properties) {
@@ -170,9 +168,9 @@ And attach our self to the listener and when we will know were we are, lets crea
 ```javascript
 this.manager.onLocationUpdate = async location => {
   this.setState({ coords: location.coords });
-  await this.makePerson("clara", { name: "Clara", age: 18 });
-  await this.makePerson("sam", { name: "Sam", age: 24 });
-  await this.makePerson("alex", { name: "Alex", age: 23 });
+  await this.makePerson("clara", { name: "Clara", age: 23 });
+  await this.makePerson("sam", { name: "Sam", age: 26 });
+  await this.makePerson("alex", { name: "Alex", age: 25 });
   await this.makePerson("clover", { name: "Clover", age: 27 });
 };
 ```
@@ -224,7 +222,7 @@ When we run the app, we see
 Ok, so what does it mean:
 
 - We get our own publication
-- We get we got some of them multiple times
+- We got some of them multiple times
 
 This is because we check publication and subscriptions multiple times, on every location update.
 
