@@ -39,12 +39,13 @@ class MainActivity : AppCompatActivity() {
             addSub()
         }
         matchText = findViewById(R.id.match_text) as TextView
+        checkLocationPermission()
     }
 
     fun addPub() {
         // Create publication
         MatchMore.instance.apply {
-            val publication = Publication("Test Topic", 1.0, 0.0)
+            val publication = Publication("Test Topic", 2.0, 600.0)
             publication.properties = hashMapOf("test" to "true")
             createPublication(publication, { result ->
                 Log.i(TAG, "Publication created ${result.topic}")
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     fun addSub() {
         // Create subscription
         MatchMore.instance.apply {
-            val subscription = Subscription("Test Topic", 1.0, 0.0)
+            val subscription = Subscription("Test Topic", 2.0, 600.0)
             subscription.selector = "test = 'true'"
             subscription.deviceId = this.main?.id
             createSubscription(subscription, { result ->
@@ -65,16 +66,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun registerDevice() {
+        //register new device - this works only first time after app instalation
+        MatchMore.instance.devices.deleteAll()
         MatchMore.instance.apply {
             startUsingMainDevice({ device ->
-                Log.i(TAG, "start using device ${device.name}")
-
+                Log.i(TAG, "start using main device ${device.name} ${device.id}")
                 // Start getting matches
                 matchMonitor.addOnMatchListener { matches, _ ->
                     Log.i(TAG, "Matches found: ${matches.size}")
-                    matchText?.text = "got ${matches.size} matches"
+                    matchText?.text = "⛰️got ${matches.size} matches⛰️"
                 }
-                matchMonitor.startPollingMatches()
+                matchMonitor.startPollingMatches(1000)
             }, Throwable::printStackTrace)
         }
     }
