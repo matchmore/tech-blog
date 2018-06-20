@@ -31,8 +31,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //for SDK
-    implementation 'com.github.matchmore.alps-android-sdk:sdk:0.6.0'
-    implementation 'com.github.matchmore.alps-android-sdk:rx:0.6.0'
+    implementation 'com.github.matchmore.android-sdk:sdk:0.7.0'
+    implementation 'com.github.matchmore.android-sdk:rx:0.7.0'
     //for permissions
     implementation 'gun0912.ted:tedpermission:2.2.0'
 }

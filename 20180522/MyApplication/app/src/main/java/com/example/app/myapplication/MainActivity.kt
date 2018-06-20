@@ -10,9 +10,11 @@ import android.widget.TextView
 import android.widget.Toast
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
-import io.matchmore.sdk.MatchMore
+import io.matchmore.sdk.Matchmore
 import io.matchmore.sdk.api.models.Publication
 import io.matchmore.sdk.api.models.Subscription
+import io.matchmore.sdk.rx.rxDelete
+import io.matchmore.sdk.rx.rxDeleteAll
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MatchMore.config(context = this, apiKey = API_KEY, debugLog = false)
+        Matchmore.config(context = this, apiKey = API_KEY, debugLog = false)
 
         val pub_btn = findViewById(R.id.pub) as Button
         val sub_btn = findViewById(R.id.sub) as Button
@@ -44,10 +46,10 @@ class MainActivity : AppCompatActivity() {
 
     fun addPub() {
         // Create publication
-        MatchMore.instance.apply {
+        Matchmore.instance.apply {
             val publication = Publication("Test Topic", 2.0, 600.0)
             publication.properties = hashMapOf("test" to "true")
-            createPublication(publication, { result ->
+            createPublicationForMainDevice(publication, { result ->
                 Log.i(TAG, "Publication created ${result.topic}")
             }, Throwable::printStackTrace)
         }
@@ -55,11 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     fun addSub() {
         // Create subscription
-        MatchMore.instance.apply {
+        Matchmore.instance.apply {
             val subscription = Subscription("Test Topic", 2.0, 600.0)
             subscription.selector = "test = 'true'"
-            subscription.deviceId = this.main?.id
-            createSubscription(subscription, { result ->
+            createSubscriptionForMainDevice(subscription, { result ->
                 Log.i(TAG, "Subscription created ${result.topic}")
             }, Throwable::printStackTrace)
         }
@@ -67,13 +68,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun registerDevice() {
         //register new device - this works only first time after app instalation
-        MatchMore.instance.devices.deleteAll()
-        MatchMore.instance.apply {
+        Matchmore.instance.apply {
+            val pubs = publications.findAll()
+            Log.i(TAG, "active pubs ${pubs.size}")
+            subscriptions.findAll().map { s ->  subscriptions.delete(s, { -> Log.i(TAG, "deleted sub ${s.id}")})}
+            publications.findAll().map { p ->  publications.delete(p, { -> Log.i(TAG, "deleted pub  ${p.id}")})}
+            main?.let {
+                devices.delete(it, { -> foo()})
+            } ?: run {
+                foo()
+            }
+        }
+    }
+
+    private fun foo(){
+        Matchmore.instance.apply {
             startUsingMainDevice({ device ->
                 Log.i(TAG, "start using main device ${device.name} ${device.id}")
                 // Start getting matches
                 matchMonitor.addOnMatchListener { matches, _ ->
                     Log.i(TAG, "Matches found: ${matches.size}")
+                    matches.map { m -> Log.i(TAG, "${m.createdAt}") }
                     matchText?.text = "⛰️got ${matches.size} matches⛰️"
                 }
                 matchMonitor.startPollingMatches(1000)
@@ -85,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         val permissionListener = object : PermissionListener {
             @SuppressLint("MissingPermission")
             override fun onPermissionGranted() {
-                MatchMore.instance.apply {
+                Matchmore.instance.apply {
                     startUpdatingLocation()
                     startRanging()
                 }
@@ -104,17 +119,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        MatchMore.instance.matchMonitor.startPollingMatches()
+        Matchmore.instance.matchMonitor.startPollingMatches()
     }
 
     override fun onPause() {
         super.onPause()
-        MatchMore.instance.matchMonitor.stopPollingMatches()
+        Matchmore.instance.matchMonitor.stopPollingMatches()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        MatchMore.instance.apply {
+        Matchmore.instance.apply {
             stopRanging()
             stopUpdatingLocation()
         }
