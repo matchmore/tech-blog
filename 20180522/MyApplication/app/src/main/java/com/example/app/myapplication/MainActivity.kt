@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val pub_btn = findViewById(R.id.pub) as Button
         val sub_btn = findViewById(R.id.sub) as Button
 
-        registerDevice()
+        setupDevice()
 
         pub_btn.setOnClickListener {
             addPub()
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         // Create publication
         Matchmore.instance.apply {
             val publication = Publication("Test Topic", 2.0, 600.0)
-            publication.properties = hashMapOf("test" to "true")
+            publication.properties = hashMapOf("color" to "red")
             createPublicationForMainDevice(publication, { result ->
                 Log.i(TAG, "Publication created ${result.topic}")
             }, Throwable::printStackTrace)
@@ -59,33 +59,18 @@ class MainActivity : AppCompatActivity() {
         // Create subscription
         Matchmore.instance.apply {
             val subscription = Subscription("Test Topic", 2.0, 600.0)
-            subscription.selector = "test = 'true'"
+            subscription.selector = "color = 'red'"
             createSubscriptionForMainDevice(subscription, { result ->
                 Log.i(TAG, "Subscription created ${result.topic}")
             }, Throwable::printStackTrace)
         }
     }
 
-    private fun registerDevice() {
-        //register new device - this works only first time after app instalation
-        Matchmore.instance.apply {
-            val pubs = publications.findAll()
-            Log.i(TAG, "active pubs ${pubs.size}")
-            subscriptions.findAll().map { s ->  subscriptions.delete(s, { -> Log.i(TAG, "deleted sub ${s.id}")})}
-            publications.findAll().map { p ->  publications.delete(p, { -> Log.i(TAG, "deleted pub  ${p.id}")})}
-            main?.let {
-                devices.delete(it, { -> foo()})
-            } ?: run {
-                foo()
-            }
-        }
-    }
-
-    private fun foo(){
+    private fun setupDevice() {
         Matchmore.instance.apply {
             startUsingMainDevice({ device ->
                 Log.i(TAG, "start using main device ${device.name} ${device.id}")
-                // Start getting matches
+                // Start fetching matches
                 matchMonitor.addOnMatchListener { matches, _ ->
                     Log.i(TAG, "Matches found: ${matches.size}")
                     matches.map { m -> Log.i(TAG, "${m.createdAt}") }
