@@ -162,3 +162,5 @@ Now let's hook up everything together, this is how onCreate looks like:
 Next start application in simulator and check if you got a match:
 
 ![alt text](https://github.com/matchmore/tech-blog/blob/4e924710b7c26165a8d14cb974d07fe4e58d08a7/20180522/match.gif "match on simulator")
+
+Android SDK is similar to iOS SDK and as you saw easy to use, happy hacking and see you in next post.
