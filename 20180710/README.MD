@@ -42,7 +42,7 @@ Next, you have to configure SDK with your API key, and you can do this in `onCre
 Now let's create a view with two buttons and a label to make testing easier.
 It can look like this:
 
-![alt text](https://github.com/matchmore/tech-blog/blob/4e924710b7c26165a8d14cb974d07fe4e58d08a7/20180522/8.png "simple view")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180710/8.png "simple view")
 
 ## Main device setup
 
@@ -161,6 +161,8 @@ Now let's hook up everything together, this is how onCreate looks like:
 
 Next start application in simulator and check if you got a match:
 
-![alt text](https://github.com/matchmore/tech-blog/blob/4e924710b7c26165a8d14cb974d07fe4e58d08a7/20180522/match.gif "match on simulator")
+![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180710/match.gif "match on simulator")
 
 Android SDK is similar to iOS SDK and as you saw easy to use, happy hacking and see you in next post.
+
+Code for the post is [here](https://github.com/matchmore/tech-blog/tree/master/20180710/MyApplication)
