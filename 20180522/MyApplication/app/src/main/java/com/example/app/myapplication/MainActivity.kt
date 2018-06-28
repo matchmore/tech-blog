@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJhbHBzIiwic3ViIjoiODU4MjdiOGMtNzZiYS00ZDM2LThjM2QtZWE5M2NkNmM1ZjRmIiwiYXVkIjpbIlB1YmxpYyJdLCJuYmYiOjE1MjY5MTczMzksImlhdCI6MTUyNjkxNzMzOSwianRpIjoiMSJ9.FFYY7AXdj8wX-kyIjtSRt0QtByaw40rpxmOI2pdJJ7DCgrMbXn7KMXAaCX1d-hg5sh4ZVw87Out6Mr2rdD2VTQ"
+    private val API_KEY = "replace with key from portal"
     private val TAG = "MatchMore"
     private var matchText: TextView? = null
 
