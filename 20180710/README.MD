@@ -1,6 +1,11 @@
 # From 0 to Match - Set Up Everything with Android Studio
 
-In my previous post, I described how to set up Matchmore integration for iOS (link [here](https://blog.matchmore.io/first-mobile-app-with-matchmore/)), in this post I will show you how to use Matchmore SDK on Android.
+In my [previous post](http://blog.matchmore.io/first-mobile-app-with-matchmore/), I described how to set up Matchmore integration for iOS. In this post I will show you how to use Matchmore SDK on Android.
+
+##Requirements
+* You need a Matchmore account. Register [here](http:///matchmore.com/account/register/) for free.
+* You need to know how to use android studio
+* You need to know kotlin programing language
 
 ## Get API key
 
@@ -10,7 +15,8 @@ As for iOS, you will need an API key, to get it login into your Matchmore accoun
 
 ## Android studio mobile app
 
-Let's create new Android studio project with Kotlin support, Set minimum SDK to Phone and Tablet `API 22` and add empty Activity.
+Let's create a new Android studio project with Kotlin support. Set minimum SDK to Phone and Tablet `API 22` and add empty Activity.
+
 Next lets edit `build.gradle` file for module app and add dependencies for Matchmore SDK.
 
 ```
@@ -40,14 +46,17 @@ Next, you have to configure SDK with your API key, and you can do this in `onCre
 ## Simple UI
 
 Now let's create a view with two buttons and a label to make testing easier.
+
 It can look like this:
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180710/8.png "simple view")
 
 ## Main device setup
 
-Before you will be able to create publication or subscription you have to have a device that you can attach them on. For that, you will use device representing your mobile phone.
+Before you will be able to create a publication or a subscription you have to have a device that you can attach them on. For that, you will use device representing your mobile phone.
+
 While setting up the primary device for your phone, you can also set up match listener - the function that application calls when there is a match between publication and subscription.
+
 The code may look like this:
 
 ```kotlin
@@ -69,9 +78,9 @@ private fun setupDevice() {
 
 The registered listener will change the text of the label in your UI to the number of matches that your app received.
 
-## Create publication and subscription
+## Create publications and subscriptions
 
-Now you are ready to create publication:
+Now you are ready to create a publication:
 
 ```kotlin
     fun addPub() {
@@ -86,6 +95,7 @@ Now you are ready to create publication:
 ```
 
 This creates a publication on the primary device with a range of 2 meters and 10 minutes duration, and this publication will have property color set to red.
+
 You set this method as on click listener for publish button.
 
 Next, create a similar method for subscription:
@@ -102,12 +112,15 @@ Next, create a similar method for subscription:
     }
 ```
 
-Subscription does not have properties instead it has selector which uses SQL like syntax to define which publication will match with this subscription.
+A subscription does not have properties, instead it has a selector which uses SQL like syntax to define which publication will match with this subscription.
+
 If the match happens, a device with given subscription will get it.
 
-As both publication and subscription are on the same topic and properties in publication satisfies conditions in subscription selector we should get a match.
+As both publications and subscriptions are on the same topic, and properties in publications satisfy conditions in the subscription selector, we should get a match.
+
 Since match for a mobile device is calculated based on its location, the last thing to do is to start updating phone location base on GPS.
-But to get that information we have to request for GPC permission first, for that you have to add you can use `tedpermissions` and code can look like this:
+
+But to get that information we have to request for GPS permission first, you can use `tedpermissions` to request it and code can look like this:
 
 ```kotlin
 private fun checkLocationPermission() {
@@ -132,8 +145,9 @@ private fun checkLocationPermission() {
     }
 ```
 
-This method also starts location updates and beacons ranging (in case you want to use publications attached to iBeacons).
-Since publication and subscription are created on the same device, the distance between them is 0 meters so they will match instantly.
+This method also starts location updates and beacons ranging (in case you want to use publications attached to beacons).
+
+Since publications and subscriptions are created at the same device, the distance between them is 0 meters, they will match instantly.
 
 Now let's hook up everything together, this is how onCreate looks like:
 
@@ -159,10 +173,12 @@ Now let's hook up everything together, this is how onCreate looks like:
 
 ## Final result
 
-Next start application in simulator and check if you got a match:
+Next, start the application in the simulator and check if you got a match:
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180710/match.gif "match on simulator")
 
-Android SDK is similar to iOS SDK and as you saw easy to use, happy hacking and see you in next post.
+Android SDK is similar to iOS SDK. As you saw it is easy to use, produce great results and works smoothly.  
 
-Code for the post is [here](https://github.com/matchmore/tech-blog/tree/master/20180710/MyApplication)
+Code for the post is [here](https://github.com/matchmore/tech-blog/tree/master/20180710/MyApplication).
+
+Happy hacking and see you in next post!
