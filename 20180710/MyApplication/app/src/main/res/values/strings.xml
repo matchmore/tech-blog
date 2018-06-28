@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="if_you_reject">This app will not work without permissions</string>
+</resources>
