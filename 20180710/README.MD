@@ -1,6 +1,6 @@
-# Simple mobile app for android
+# From 0 to Match - Set Up Everything with Android Studio
 
-In my previous post, I described how to set up Matchmore integration for iOS (link here), in this post I will show you how to use Matchmore SDK on Android.
+In my previous post, I described how to set up Matchmore integration for iOS (link [here](https://blog.matchmore.io/first-mobile-app-with-matchmore/)), in this post I will show you how to use Matchmore SDK on Android.
 
 ## Get API key
 

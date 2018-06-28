@@ -5,3 +5,4 @@
 - ["Getting Start with Matchmore: A Proximity detection based location app with Swift iOS part 2 of 2" by Jean-Marc Du](https://github.com/matchmore/tech-blog/tree/master/20180411)
 - ["Saving iPhones lives" by Maciej Burda](https://github.com/matchmore/tech-blog/tree/master/20180416)
 - ["Everything you need to know about beacons" by Jean-Marc Du](https://github.com/matchmore/tech-blog/tree/master/20180613)
+- ["From 0 to Match - Set Up Everything with Android Studio" by Adam Smolarek](https://github.com/matchmore/tech-blog/tree/master/20180710)
