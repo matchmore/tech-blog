@@ -71,7 +71,7 @@ class ReadActivity : AppCompatActivity() {
     {
         Matchmore.instance.apply {
             startUsingMainDevice ({ d ->
-                val sub = Subscription ("news2", 100.0, 180.0)
+                val sub = Subscription ("news2", 500.0, 180.0)
                 createSubscriptionForMainDevice(sub, {result ->
                     Log.d("debug", "Subscription made successfully with topic ${result.topic}")
 
