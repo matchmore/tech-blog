@@ -35,8 +35,6 @@ For our project, we are going to create three different activities:
 ## Main Activity
 The main activity will be the landing point of our app. As we want it to be simple, we are only going to add two buttons on the layout.
 
-![Screen-Shot-2018-07-16-at-13.58.57-1](/content/images/2018/07/Screen-Shot-2018-07-16-at-13.58.57-1.png)
-
 
 Each of these buttons will open an activity. In order to do that, we have to add an Intent in `MainActivity.kt`:
 
@@ -60,7 +58,6 @@ startActivity(intent)
 ##Write Activity
 
 Now let's move to the `WriteActivity`. This activity will be used to publish news or information. To make the layout as simple as possible, we are just going to add two text fields, a submit button and one TextView. As we said before, one text field will be created for the title and the second one for the news content. The TextView will be used to provide the status of our actions.
-![Screen-Shot-2018-07-16-at-14.31.57-1](/content/images/2018/07/Screen-Shot-2018-07-16-at-14.31.57-1.png)
 
 
 ```XML
@@ -156,8 +153,6 @@ tools:layout_editor_absoluteY="8dp" />
 
 </android.support.constraint.ConstraintLayout>
 ````
-![Screen-Shot-2018-07-19-at-16.03.40-1](/content/images/2018/07/Screen-Shot-2018-07-19-at-16.03.40-1.png)
-
 
 
 ##Connect the UI to the code
@@ -200,7 +195,7 @@ val listView = findViewById (R.id.list) as ListView
 #Part 2: Integrate Matchmore
 
 
-In this second part of the blog post, we are going to integrate Matchmore to our minimalist app. In case you have missed the first part, you can download the code of the app on this link [LINK_HERE](#).
+In this second part of the blog post, we are going to integrate Matchmore to our minimalist app. In case you have missed the first part, you can download the code of the app on [this link](https://github.com/matchmore/tech-blog/tree/feature/news-app/20180730).
 
 As a reminder, the goal of our app is to share news within a specific range and with an expiry date. The solution beheind the location-based news app could also be used for geofencing marketing. The app would trigger a notification when a potential customer enters a shop, or the area close to the shop, where there is a special discount on a product for example. 
 
@@ -364,12 +359,10 @@ checkMatches()
 }
 ```
 
-![newsapp_video](/content/images/2018/07/newsapp_video.gif)
 
-I hope you enjoyed this blog post! Don't hesitate to take a look at the code of this app at [Github](#).
+I hope you enjoyed this blog post! Don't hesitate to take a look at the code of this app at [Github](https://github.com/matchmore/tech-blog/tree/feature/news-app/20180730).
 
 If you have any questions, feel free to contact [me](alpha.diallo@matchmore.com) by email or on [Gitter](https://gitter.im/matchmore).
-
 
 
 
