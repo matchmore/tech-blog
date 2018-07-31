@@ -1,4 +1,4 @@
-In this post, we'll go through how to create a simple app on Android Studio using Kotlin and Matchmore. The app we'll create is a location-based news app. It will enable news or information to be sent out to people within a defined rang of distance. 
+In this post, we'll go through how to create a simple app on Android Studio using Kotlin and Matchmore. The app we'll create is a location-based news app. It will enable news or information to be sent out to people within a defined range of distance. 
 
 As a reminder, Matchmore introduced the notion of [Geomatching](http://blog.matchmore.io/what-is-geomatching/) which is implemented as an extension of the [publish–subscribe messaging pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern).
 
@@ -20,21 +20,20 @@ This blog post will be divided into two parts:
 
 This blog post is based on the previous tutorial [Create an Android app with Matchmore](https://blog.matchmore.io/first-android-app-with-matchmore/). The previous tutorial contains more details such as how to set up your tools and get the API key. If you feel that this tutorial is too difficult, we advise you to start with the previous one. 
 
-#Part 1: Create the UI
+# Part 1: Create the UI
 
 For our project, we are going to create three different activities:
 - The first one will be the Main Activity with a simple layout that will have only 2 buttons linked to the 2 other activities.
 - The second one will be for the user who wants to advert news. We will make it simple, by adding two text fields and one submit button to the layout. The first text field will set the news title and the second one the news content.
 - The third activity will be for the news subscribers and it will display all the news based on the matches gotten by the user.
 
-##Let's start!
+## Let's start!
 
 - Open Android Studio.
 - Create a new project (let's call it `NewsApp`) with an empty activity. Don't forget to check the box related to adding Kotlin Support.
 
 ## Main Activity
 The main activity will be the landing point of our app. As we want it to be simple, we are only going to add two buttons on the layout.
-
 
 Each of these buttons will open an activity. In order to do that, we have to add an Intent in `MainActivity.kt`:
 
@@ -45,117 +44,48 @@ var intent = Intent ()
 
 write.setOnClickListener()
 {
-intent.setClass(this, WriteActivity::class.java)
-startActivity(intent)
+    intent.setClass(this, WriteActivity::class.java)
+    startActivity(intent)
 }
-read.setOnClickListener()
+ read.setOnClickListener()
 {
-intent.setClass(this, ReadActivity::class.java)
-startActivity(intent)
+    intent.setClass(this, ReadActivity::class.java)
+    startActivity(intent)
 }  
 ```
 
-##Write Activity
+## Write Activity
 
 Now let's move to the `WriteActivity`. This activity will be used to publish news or information. To make the layout as simple as possible, we are just going to add two text fields, a submit button and one TextView. As we said before, one text field will be created for the title and the second one for the news content. The TextView will be used to provide the status of our actions.
 
-
-```XML
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".WriteActivity">
-
-<EditText
-android:id="@+id/title"
-android:layout_width="353dp"
-android:layout_height="39dp"
-android:layout_marginBottom="8dp"
-android:layout_marginEnd="8dp"
-android:layout_marginStart="8dp"
-android:layout_marginTop="8dp"
-android:ems="10"
-android:hint="Title"
-android:inputType="textPersonName"
-android:selectAllOnFocus="false"
-android:textAlignment="viewStart"
-app:layout_constraintBottom_toTopOf="@+id/content"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintHorizontal_bias="0.533"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintVertical_bias="0.042" />
-
-<EditText
-android:id="@+id/content"
-android:layout_width="352dp"
-android:layout_height="wrap_content"
-android:layout_marginEnd="8dp"
-android:layout_marginStart="8dp"
-android:layout_marginTop="43dp"
-android:ems="10"
-android:hint="Content"
-android:inputType="textMultiLine"
-android:textAlignment="viewStart"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toBottomOf="@+id/title" />
-
-<Button
-android:id="@+id/submit"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_marginStart="16dp"
-android:layout_marginTop="8dp"
-android:text="Submit"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toBottomOf="@+id/content" />
-
-<TextView
-android:id="@+id/status"
-android:layout_width="250dp"
-android:layout_height="46dp"
-android:layout_marginEnd="8dp"
-android:layout_marginStart="8dp"
-android:layout_marginTop="32dp"
-android:text="Status: Not published yet"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintHorizontal_bias="0.428"
-app:layout_constraintStart_toEndOf="@+id/submit"
-app:layout_constraintTop_toBottomOf="@+id/content" />
-
-</android.support.constraint.ConstraintLayout>```
+_You can find the xml file of the layout on [this link](https://github.com/matchmore/tech-blog/blob/feature/news-app/20180730/app/src/main/res/layout/write.xml)_
 
 The `WriteActivity` will be used by our app to create a location-based publication. In this example, we will set manually the range and the expiry date. However, it's possible to customize the range and expiry date in your app. 
 
-##Read activity
+## Read activity
 The next activity will mostly be used by the subscribers of our app. The main goal of this activity will be to print out the list of all the matches. When the susbcriber enters into a news post range, there will be an instant match. All the matches will be displayed through this activity.
 
 Just like the others layouts, we are going to make it simple. We will just add a _`list_view`_
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".ReadActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReadActivity">
 
-<ListView
-android:id="@+id/list"
-android:layout_width="368dp"
-android:layout_height="487dp"
-tools:layout_editor_absoluteX="8dp"
-tools:layout_editor_absoluteY="8dp" />
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="368dp"
+        android:layout_height="487dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 
 </android.support.constraint.ConstraintLayout>
 ````
 
-
-##Connect the UI to the code
+## Connect the UI to the code
 
 Now, we have a minimalist user interface for our application, the next step is to link the UI to the code.
 
@@ -163,7 +93,7 @@ In the `WriteActivity`, we should declare all the UI elements that we are going 
 `val "val_name" = findViewById("UI Element") as "UI element's type"`
 
 We will repeat the same process for all the other UI elements. At the end, we should have this code:
-```Kotlin
+```kotlin
 val title_txt = findViewById(R.id.title) as EditText
 val content_txt = findViewById(R.id.content) as EditText
 val status_txt = findViewById(R.id.status) as TextView
@@ -171,39 +101,38 @@ val submit_btn = findViewById(R.id.submit) as Button
 ```
 We need to create a new `val` that will get the data entered by the user in the two textfields.
 
-```Kotlin
+```kotlin
 val title = title_txt.text
 val content = content_txt.text
 ```
 
 It's almost done now! We have our UI, but it's quite useless for the moment. We will add a listener to our button and trigger an event when the user clicks on it. For that, we will use the code below:
 ```Kotlin
-submit_btn.setOnClickListener()
-{
-status_txt.setText("Publication made successfully")
-}   
+ submit_btn.setOnClickListener()
+        {
+        status_txt.setText("Publication made successfully")
+        }   
 ```
 
 In the second part of this blog post, we will create a publication when the user clicks on the submit button.
 
 In the `ReadActivity` we will do the same thing for the ListView. This list will be used to print all the matches that we are going to receive.
 ```Kotlin
-val listView = findViewById (R.id.list) as ListView
+        val listView = findViewById (R.id.list) as ListView
 ```
 
 
-#Part 2: Integrate Matchmore
-
+# Part 2: Integrate Matchmore
 
 In this second part of the blog post, we are going to integrate Matchmore to our minimalist app. In case you have missed the first part, you can download the code of the app on [this link](https://github.com/matchmore/tech-blog/tree/feature/news-app/20180730).
 
-As a reminder, the goal of our app is to share news within a specific range and with an expiry date. The solution beheind the location-based news app could also be used for geofencing marketing. The app would trigger a notification when a potential customer enters a shop, or the area close to the shop, where there is a special discount on a product for example. 
+As a reminder, the goal of our app is to share news within a specific range and with an expiry date. The solution behind this location-based news app could also be used for geofencing marketing. The app would trigger a notification when a potential customer enters a shop, or the area close to the shop, where there is a special discount on a product for example. 
 
 As you will see in the second part of this blog post, we will build our application easily using Matchmore. Here we go!
 
 ##Set up the tools
 
-First of all, we have to create an account on Matchmore, sign up for free [here](https://matchmore.io/account/register/). Then we will create a new app and get the API key. See how to get the API key at Matcmore [here](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180329/img/create-app.gif). 
+First of all, we have to create an account on Matchmore, sign up for free [here](https://matchmore.io/account/register/). Then we will create a new app and get the API key. See how to get the API key at Matchmore [here](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180329/img/create-app.gif). 
 
 Once it's done, we have to edit the top-level gradle file (`build.gradle (project: NewsApp)`) and add this line in the repositories:
 ```gradle
@@ -212,14 +141,14 @@ maven { url "https://jitpack.io" }
 
 Then, we will edit the module's ```build.gradle``` file and add the dependencies of Matchmore and TedPermission:
 ```gradle
-//for SDK
-implementation 'com.github.matchmore.android-sdk:sdk:0.7.0'
-implementation 'com.github.matchmore.android-sdk:rx:0.7.0'
-//for permissions
-implementation 'gun0912.ted:tedpermission:2.2.0'
+    //for SDK
+    implementation 'com.github.matchmore.android-sdk:sdk:0.7.0'
+    implementation 'com.github.matchmore.android-sdk:rx:0.7.0'
+    //for permissions
+    implementation 'gun0912.ted:tedpermission:2.2.0'
 ```
 
-Add the permission for your app by editing the `AndroidManifest`. In the project navigator, find the file AndroidManifest.xml (App/manifests), double click on it . Then, inside the `<manifest>` tag, add the following lines:
+Add the permission for your app by editing the `AndroidManifest`. In the project navigator, find the file AndroidManifest.xml (App/manifests), double click on it. Then, inside the `<manifest>` tag, add the following lines:
 ```XML
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
@@ -231,14 +160,14 @@ Since Matchmore is built around the publish-subscribe pattern, we must create a 
 Before using Matchmore SDK, we have to configure it by adding these instructions inside each activity where we use Matchmore SDK:
 ```Kotlin
 
-val API_KEY = "YOUR-API-KEY"
-if (!Matchmore.isConfigured())
-{
-Matchmore.config(this,API_KEY,false)
-}
+    val API_KEY = "YOUR-API-KEY"
+    if (!Matchmore.isConfigured())
+    {
+        Matchmore.config(this,API_KEY,false)
+    }
 ```
 
-##Create a publication
+## Create a publication
 
 A **publication** can be seen as a Java Messaging Service (JMS) publication extended with the notion of geographical zone. This zone is defined by a (center) location and a range around that location.
 
@@ -250,45 +179,45 @@ Our publication will have as arguments:
 
 A publication will be created when the user clicks on the submit button. When the publication is made, we will update the status and inform the user that the publication has been made successful.
 
-```Kotlin
+```kotlin
 
 submit_btn.setOnClickListener()
-{
-Matchmore.instance.apply {
-startUsingMainDevice ({ _ ->
-val pub = Publication("news", 500.0, 180.0)
-pub.properties = hashMapOf("title" to title.toString(), "content" to content.toString())
-createPublicationForMainDevice(pub,
-{ result ->
-Log.d("debug","Publication made successfully")
-status_txt.setText("Publication made successfully")
-}, Throwable::printStackTrace)
-}, Throwable::printStackTrace)
-}
-}
+        {
+            Matchmore.instance.apply {
+                startUsingMainDevice ({ _ ->
+                val pub = Publication("news", 500.0, 180.0)
+                    pub.properties = hashMapOf("title" to title.toString(), "content" to content.toString())
+                    createPublicationForMainDevice(pub,
+                            { result ->
+                        Log.d("debug","Publication made successfully")
+                        status_txt.setText("Publication made successfully")
+                    }, Throwable::printStackTrace)
+            }, Throwable::printStackTrace)
+        }
+    }
 ```
 
-This will create a publication with a range of 500 meters around the user's device and the publication will expire after 1 800 seconds.
+This will create a publication with a range of 500 meters around the user's device and the publication will expire after 180 seconds.
 
-##Create a subscription
+## Create a subscription
 The subscription will be created with the same principles. Each subscription need to have at least a topic, a range and a duration.
 
 When a subscriber enters inside a publication's range, if they have the same topic, a match will occurs. Since we are going the add a subscription and list the matches in the same activity, we will separate these two parts in our code and create two separate functions: addSub() and checkMatches().
 
 Just like the publications, to create a subscription, we will use the following code:
 
-```Kotlin
+```kotlin
 private fun addSub()
 {
-Matchmore.instance.apply {
-startUsingMainDevice ({ device ->
-val sub = Subscription ("news", 100.0, 1800.0)
-createSubscriptionForMainDevice(sub, {result ->
-Log.d("debug", "Subscription made successfully with ID ${result.deviceId}")
+        Matchmore.instance.apply {
+            startUsingMainDevice ({ device ->
+            val sub = Subscription ("news", 500.0, 180.0)
+            createSubscriptionForMainDevice(sub, {result ->
+                Log.d("debug", "Subscription made successfully with ID ${result.deviceId}")
 
-}, Throwable::printStackTrace)
-}, Throwable::printStackTrace)
-}
+            }, Throwable::printStackTrace)
+        }, Throwable::printStackTrace)
+    }
 }
 ```
 Please make sure to have the same topic as the publication!
@@ -298,73 +227,64 @@ Once it's done, we will create a new function that will check the matches with a
 
 This is the code that we will use:
 
-```Kotlin
-private fun checkMatches() {
-
-//Declare our ListView
-val listView = findViewById (R.id.list) as ListView
-
-// Empty Array that will used to store the properties of the publications
-var rsl: ArrayList<String> = ArrayList()
+```kotlin
+ private fun checkMatches() {
+        //Declare our ListView
+        val listView = findViewById (R.id.list) as ListView
+        
+        // Empty Array that will used to store the properties of the publications
+        var rsl: ArrayList<String> = ArrayList()
 
 Matchmore.instance.apply {
-startUsingMainDevice({ _ ->
-matchMonitor.addOnMatchListener { matches, _ ->
-
-//We should get there every time a match occur
-Log.d("debug", "We got ${matches.size} matches")
-
-val first = matches.first()
-
-//Let's fill our Array with the properties of the publication
-rsl.add(first.publication!!.properties["content"].toString())
-
+    startUsingMainDevice({ _ ->
+        matchMonitor.addOnMatchListener { matches, _ ->
+        
+        //We should get there every time a match occur
+        Log.d("debug", "We got ${matches.size} matches")
+        val first = matches.first()
+        
+        //Let's fill our Array with the properties of the publication
+        rsl.add(first.publication!!.properties["content"].toString())
+    
 val adapter = ArrayAdapter(this@ReadActivity, android.R.layout.simple_list_item_1, rsl)
-listView.adapter = adapter
-}
-
+            listView.adapter = adapter
+        }
 matchMonitor.startPollingMatches(1000)
-}, Throwable::printStackTrace)
+    }, Throwable::printStackTrace)
 
-}
-}
+        }
+    }
 ```
 
 The purpose of this function is to receive the matches and to extract what we need in the ListView.
+
 The steps to get a match are:
 1. Start using the device.
-2. Set a MatchListener: Just like the `clickListener` that we set up before, the MatchListener will be triggered every time when there is a match.       
-3. Browse the matches: As a Set Collection, `matches` will collect all the matches and put them into a collection. We will use the `.first` method to get the most recent match.
+2. Set a MatchListener: Just like the `clickListener` that we set up before, the MatchListener will be triggered every time when there is a match.  
+3. Browse the matches: As a Set Collection are unordered, `matches` will collect all the matches and put them into a collection. We will use the `.first` method to get the most recent match.     
 4. Populate: Since we have the most recent match, we can add the information that we need into the ArrayList `rsl` that we have created by adding a new row.
-
-> **Set**
-> A generic unordered collection of elements that does not support duplicate elements. Methods in this interface support only read-only access to the set; read/write access is supported through the MutableSet interface.  
-> 
-4. ```startPollingMatches(1000)``` is used to interrogate Matchmore regularly depending on the refreshing time that we sets up. The argument of startPollingMatches is set in milliseconds.
+ 
+5. ```startPollingMatches(1000)``` is used to interrogate Matchmore regularly depending on the refreshing time that we sets up. The argument of startPollingMatches is set in milliseconds.
 
 Our `onCreate` method should now looks like this:
 
-```Kotlin
+```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
-super.onCreate(savedInstanceState)
-setContentView(R.layout.read)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.read)
 
-if (!Matchmore.isConfigured())
-{
-Matchmore.config(this, API_KEY, false)
-}
-checkLocationPermission()
-addSub()
-checkMatches()
+        if (!Matchmore.isConfigured())
+        {
+            Matchmore.config(this, API_KEY, false)
+        }
+        checkLocationPermission()
+        addSub()
+        checkMatches()
 }
 ```
-
+![newsapp_video](/content/images/2018/07/newsapp_video.gif)
 
 I hope you enjoyed this blog post! Don't hesitate to take a look at the code of this app at [Github](https://github.com/matchmore/tech-blog/tree/feature/news-app/20180730).
 
 If you have any questions, feel free to contact [me](alpha.diallo@matchmore.com) by email or on [Gitter](https://gitter.im/matchmore).
-
-
-
-
 
