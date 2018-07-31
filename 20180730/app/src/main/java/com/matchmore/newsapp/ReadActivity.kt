@@ -45,7 +45,8 @@ class ReadActivity : AppCompatActivity() {
         Log.d("debug", "Check matches")
 
         Matchmore.instance.apply {
-            startUsingMainDevice ({ device ->
+            
+                //Start fetching matches
                 matchMonitor.addOnMatchListener { matches, _ ->
 
                     //We should get there every time a match occur
@@ -61,7 +62,6 @@ class ReadActivity : AppCompatActivity() {
                 }
 
                 matchMonitor.startPollingMatches()
-            }, Throwable::printStackTrace)
 
         }
     }
