@@ -282,7 +282,6 @@ override fun onCreate(savedInstanceState: Bundle?) {
         checkMatches()
 }
 ```
-![newsapp_video](/content/images/2018/07/newsapp_video.gif)
 
 I hope you enjoyed this blog post! Don't hesitate to take a look at the code of this app at [Github](https://github.com/matchmore/tech-blog/tree/feature/news-app/20180730).
 
