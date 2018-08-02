@@ -45,7 +45,7 @@ After logging in ([register for free here](http://matchmore.com/account/register
 
 ![alt text](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180329/img/create-app.gif "create app")
 
-And now lets use the key, in the application. An good place is the App.xaml.cs file in the Project which is shared for both platforms.
+And now let's use the key in the application. A good place is the App.xaml.cs file in the Project which is shared for both platforms.
 
 
 ```csharp
@@ -70,7 +70,7 @@ protected override void OnStart()
 2. Setting up the default device of the SDK. I will persist some metadata locally on the client device as well create a device in the Matchmore service.
 
 3. Starting the location service.
-And here there are couple of cavets we need to touch upon.
+And here there are couple of caveats we need to touch upon.
 
 We mentioned earlier about the Xamarin specific version of the SDK, and that we are using the .NET Standard.
 
@@ -140,7 +140,7 @@ Navigate to `MockDataSource.cs` and rename it to `MatchmoreDataSource.cs` and co
 
 ```
 
-To no produce to much boilerplate for our example, lets hijack the `Item` class and make it do some more work for us.
+To avoid producing too much boilerplate for our example, let's hijack the `Item` class and make it do some more work for us.
 
 Change the `List` to a `HashSet` to handle duplication and modify the `Item` class accordingly.
 
@@ -246,7 +246,7 @@ Similarly we can update other CRUD methods, for example getting all matches
 
 Great, now we need to subscribe to other postings
 
-For now lets add a simple subscription, lets get everything published in our vicinity.
+For now let's add a simple subscription, let's get everything published in our vicinity.
 
 In the App.xaml.cs, OnStart method add
 
@@ -264,7 +264,7 @@ if (!Matchmore.SDK.Matchmore.Instance.ActiveSubscriptions.Any()){
 
 Here immediatally you can notice that adding a new publication will get you a *match*, you were matched with your own publication. Since we are using a HashSet we are worry-free.
 
-Ok, we got a simple sharing app done and ready, but now we search for everything. Better to add a functionality to narrow down the lendable items.
+Ok, we got a simple sharing app done and ready, but now we need to search for everything. In order to do that, we have to add a functionality to narrow down the lendable items.
 
 In the `ItemsPage.xaml` in the outer StackLayout add
 ```xml
@@ -319,7 +319,7 @@ So lets write a query to find publications where the term is in the name or desc
 var selector = $"name LIKE \"{text}\" OR description LIKE \"{text}\"";
 ```
 
-Great, now we can subscribe for other publications and borrow stuff from out neighbours!
+Great, now we can subscribe for other publications and borrow stuff from our neighbours!
 
 ![5-list](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180808/img/5-list.png "5-list")
 
