@@ -1,6 +1,11 @@
-# Quick and easy way to start with Matchmore: Xamarin
+We previously covered SDK for [_Swift_](https://blog.matchmore.io/getting-started-with-matchmore-a-swift-tutorial/), [_Kotlin_](https://blog.matchmore.io/getting-started-with-matchmore-a-proximity-detection-based-location-app-with-kotlin/) and [_Javascript_](https://blog.matchmore.io/react-native-and-matchmore/), now we will cover Xamarin, the favorite tool in the .NET developers tool-belt for mobile applications!
 
-We previouly covered SDK for _Swift_, _Kotlin_ and _Javascript_, now we will cover Xamarin, the favourite tools in the .NET developers toolbelt for mobile applications!
+# Requirements
+Visual Studio  installed on your computer. Download Visual Studio for free here.
+Good knowledge of C# and Xamarin.
+A Matchmore account to start using the service. You can register for [free here.](https://visualstudio.microsoft.com/)
+If you want to test the app in real life, you'll need at least two devices, any Android or iOS should suffice.
+Willingness to learn some new stuff.
 
 We will be making a app for localized borrowing of items, like you want to install a shelf and you need a drill just for one job. Maybe somebody nearby will have one and will lend it to you for a beer or a hug?
 
@@ -74,7 +79,7 @@ And here there are couple of caveats we need to touch upon.
 
 We mentioned earlier about the Xamarin specific version of the SDK, and that we are using the .NET Standard.
 
-So we need to fill in some piecies and gives better control over this from your application.
+So we need to fill in some pieces and gives better control over this from your application.
 
 We implement the `ILocationService` interface
 
@@ -228,7 +233,7 @@ Now lets modify the storage to update create a `Publication` when we add an Item
         }
 ```
 
-We added Publication Ids to track these entities later in an easer fasshion.
+We added Publication Ids to track these entities later in an easer fashion.
 
 Similarly we can update other CRUD methods, for example getting all matches
 
@@ -262,7 +267,7 @@ if (!Matchmore.SDK.Matchmore.Instance.ActiveSubscriptions.Any()){
             }
 ```
 
-Here immediatally you can notice that adding a new publication will get you a *match*, you were matched with your own publication. Since we are using a HashSet we are worry-free.
+Here immediately you can notice that adding a new publication will get you a *match*, you were matched with your own publication. Since we are using a HashSet we are worry-free.
 
 Ok, we got a simple sharing app done and ready, but now we need to search for everything. In order to do that, we have to add a functionality to narrow down the lendable items.
 
@@ -319,7 +324,7 @@ So lets write a query to find publications where the term is in the name or desc
 var selector = $"name LIKE \"{text}\" OR description LIKE \"{text}\"";
 ```
 
-Great, now we can subscribe for other publications and borrow stuff from our neighbours!
+Great, now we can subscribe for other publications and borrow stuff from our neighbors!
 
 ![5-list](https://raw.githubusercontent.com/matchmore/tech-blog/master/20180808/img/5-list.png "5-list")
 
