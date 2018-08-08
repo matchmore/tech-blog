@@ -20,6 +20,9 @@ namespace shared_economy_app.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            const string p1 = Android.Manifest.Permission.AccessFineLocation;
+            const string p2 = Android.Manifest.Permission.AccessCoarseLocation;
+            RequestPermissions(new string[] { p1, p2 }, 0);
             LoadApplication(new App());
         }
     }
