@@ -61,6 +61,9 @@ Happy hacking!
 # References
 
 https://www.nordicsemi.com/eng/Products/Bluetooth-5
+
 https://github.com/kmackay/micro-ecc
+
 https://www.postscapes.com/open-source-bluetooth-5-beacon-ruuvitag
+
 https://developers.google.com/beacons/eddystone-eid
