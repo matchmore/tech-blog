@@ -1,4 +1,8 @@
+Beacons are becoming more popular solution for tracking onjects in our world. In this post I will talk about about the limitation of the technology in regards to security and how to over come it. I will discribe current solution for the Bluetooth 4.0 beacons and propose more efficient solution (in terms of backend required and phone battery consumption) for Bluetooth 5.0 which is now entering the market.
+
 # Beacons
+
+![beacons](https://raw.githubusercontent.com/matchmore/tech-blog/master/20181022/Beacons.jpg "beacons")
 
 A beacon is a Bluetooth device that uses the Bluetooth advertisement packages (a part of GAP protocol) to send data instead of paring with another device.
 There is an additional restriction on the format of broadcasted packages. 
@@ -13,6 +17,8 @@ for everyone that will visit your museum you provide them with a voucher for som
 So your application will think that someone is in the museum but in fact, he will be on the street selling your museum vouchers to other people ruining desired promotion outcome.
 
 # Secure Beacons
+
+![security](https://raw.githubusercontent.com/matchmore/tech-blog/master/20181022/security.jpg "security")
 
 The solution for beacon spoofing is to add on top of existing GAP protocol additional logic that would prevent spoofing. We have to work in boundaries of Bluetooth standard to not lose compatibility with all standard beacon libraries.
 One way to do this is to periodically change beacon UUID and minor/major numbers according to some algorithm then implement the same logic on the server side that would resolve underlying beacon based on ephemeral values scanned by a mobile application. This is what [Edistone](https://developers.google.com/beacons/eddystone-eid) and [kontakt.io](https://support.kontakt.io/hc/en-gb/articles/206762009-Kontakt-io-Secure-Shuffling) are doing
