@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context=".Home">
+
+    <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.3"
+            android:background="@drawable/applause"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircleRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="71dp"
+            android:fontFamily="@font/lobster"
+            android:text="Matchmore Festival"
+            android:textColor="@android:color/black"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toTopOf="@+id/subtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="72dp"
+            android:text="Rock your life !"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/findFriends"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <Button
+            android:id="@+id/touringGuide"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="189dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/montserrat"
+            android:padding="10dp"
+            android:text="Touring Guide"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/findFriends" />
+
+    <Button
+            android:id="@+id/findFriends"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/montserrat"
+            android:padding="10dp"
+            android:text="Find your friends"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toTopOf="@+id/touringGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+
+
+</android.support.constraint.ConstraintLayout>

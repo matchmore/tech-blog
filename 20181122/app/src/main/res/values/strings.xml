@@ -1,0 +1,11 @@
+<resources>
+	<string name="app_name">Matchmore Festival</string>
+
+	<string name="name_editText">Enter your name</string>
+	<string name="title_cluster">Join a group</string>
+	<string name="groupName">Enter your group name</string>
+    <string name="join_friends_cluster">Join your friend\'s cluster by entering their ID</string>
+	<string name="cluster_number">Cluster\'s number</string>
+	<string name="title_activity_live">Go live!</string>
+    <string name="next">Next</string>
+</resources>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+											 xmlns:app="http://schemas.android.com/apk/res-auto"
+											 xmlns:tools="http://schemas.android.com/tools"
+											 android:layout_width="match_parent"
+											 android:layout_height="match_parent"
+											 tools:context=".JoinCluster"
+											 tools:layout_editor_absoluteY="81dp">
+
+	<TextView
+			android:id="@+id/text_join_cluster"
+			android:layout_width="352dp"
+			android:layout_height="25dp"
+			android:layout_marginBottom="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="8dp"
+			android:layout_weight="1"
+			android:text="@string/join_friends_cluster"
+			app:layout_constraintBottom_toTopOf="@+id/idJoin"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+	<EditText
+			android:id="@+id/idJoin"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="32dp"
+			android:ems="10"
+			android:hint="@string/cluster_number"
+			android:inputType="number"
+			android:textAlignment="center"
+			android:textSize="40sp"
+			android:textStyle="bold"
+			app:layout_constraintBottom_toTopOf="@+id/joinClusterBtn"
+			app:layout_constraintStart_toStartOf="parent" />
+
+	<TextView
+			android:id="@+id/match"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:fontFamily="@font/lobster"
+			android:text="You've joined no cluster yet!"
+			android:textSize="27sp"
+			app:layout_constraintBottom_toTopOf="@+id/find"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+	<Button
+			android:id="@+id/find"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="204dp"
+			android:text="Find your friends"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+	<Button
+			android:id="@+id/joinClusterBtn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:text="Join"
+			app:layout_constraintBottom_toTopOf="@+id/match"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
