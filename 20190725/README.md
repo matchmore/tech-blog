@@ -67,7 +67,7 @@ Now, click on the Publication's tab. Add a publication by clicking on the approp
 
 Repeat the same steps for the two other hotels. After filling all the fields, your scenario should look like this:
 
-```Javascript
+```Json
 {
   "scenario": [
     {
